@@ -430,19 +430,23 @@ class MenuHandler:
                 if self.tipo == 1: #Confirmamos la configuracion de Frecuencia.
                     if self.Menu_option_confirmacion == 0 :
                         # la confirmacion es negativa por lo que salimos sin hacer nada.
+                        print("modificacion de Frecuencia cancelada")
                         self.menu=0
                         self.display_option()
                     else:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
+                        print("Frecuencia modificada:"+str(self.CounterValue_Option_fr)+"Hz")
                         self.menu=0
                         self.display_option()
                 if self.tipo == 2: # Confirmamos la configuracion de RCP
                     if self.Menu_option_confirmacion == 0 :
                         # la confirmacion es negativa por lo que salimos sin hacer nada.
+                        print("modificacion de RCP cancelada")
                         self.menu=0
                         self.display_option()
                     else:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
+                        print("RCP modificada:"+str(self.CounterValue_Option_fr)+"dB")
                         self.menu=0
                         self.display_option()
             
