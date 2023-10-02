@@ -245,19 +245,7 @@ class MenuHandler:
                 # para esto cargamos un menu de confirmacion: ese menu va a ser el valor 10 de la variable menu:
                 self.menu = 10
                 self.menu_confirmacion()
-            elif self.menu == 10:
-                if self.Menu_option_confirmacion == 0 :
-                    # la confirmacion es negativa por lo que salimos sin hacer nada.
-                    self.menu=0
-                    self.select_option()
-                else:
-                    # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
-
-
-                    self.menu=0
-                    self.select_option()
-
-
+           
         elif(end_time - start_time) > 0.1 and (end_time - start_time) < 1 :
             if self.menu == -1:
                 self.device.show()
@@ -312,9 +300,16 @@ class MenuHandler:
                 elif self.Menu_Option_fr == 11:
                     self.fr_mult = 1000000000
                     self.select_option_Fr()
-                    
-                            # aceptaremos lo que tengamos en el menu.
-
+                # aceptaremos lo que tengamos en el menu.
+            elif self.menu == 10:
+                if self.Menu_option_confirmacion == 0 :
+                    # la confirmacion es negativa por lo que salimos sin hacer nada.
+                    self.menu=0
+                    self.display_option()
+                else:
+                    # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
+                    self.menu=0
+                    self.display_option()
 
     def run(self):
         current_val = 0
