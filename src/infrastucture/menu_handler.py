@@ -113,11 +113,11 @@ class MenuHandler:
 
     def display_Confirmacion(self,tipo,variable):
         with canvas(self.device) as draw: 
-            draw.text((0, 0), "Quieres confirmar?  ", font=font, fill="white")
+            draw.text((2, 0), "Quieres confirmar?  ", font=font, fill="white")
             if tipo == 1: #nos indica que el cambio es de frecuencia
-                draw.text((20,10),"Frecuencia:",font=font, fill="white")
-                draw.text((18,30),str(variable)+"Hz",font=font, fill="white")
-                draw.text((10,40),"SI              NO",font=font, fill="white")
+                draw.text((20,12),"Frecuencia:",font=font, fill="white")
+                draw.text((18,25),str(variable)+"Hz",font=font, fill="white")
+                draw.text((35,40),"SI          NO",font=font, fill="white")
             for i, option in enumerate(self.options_confirmacion):
                 x_position = 80 - i * 40
                 if i == self.Menu_option_confirmacion:
