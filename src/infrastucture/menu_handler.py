@@ -121,7 +121,7 @@ class MenuHandler:
     def display_option_RCP(self):
         with canvas(self.device) as draw: 
             draw.text((10, 0), "Atenuador RCP:", font=font, fill="white")
-            draw.text((10,50),str(self.CounterValue_RCP)+" dB",font=font, fill="white")
+            draw.text((50,30),str(self.CounterValue_RCP)+" dB",font=font, fill="white")
     
     def display_option_LCP(self):
         with canvas(self.device) as draw: 
@@ -216,14 +216,14 @@ class MenuHandler:
         self.CounterValue_RCP += 1
         if self.CounterValue_RCP > 31 :
             self.CounterValue_RCP = 0
-        print("RCP: "+self.CounterValue_RCP+" dB")
+        print("RCP: "+str(self.CounterValue_RCP)+" dB")
         self.select_option_RCP()
 
     def previous_option_RCP(self):
         self.CounterValue_RCP -= 1
         if self.CounterValue_RCP < 0:
             self.CounterValue_RCP = 31
-        print("RCP: "+self.CounterValue_RCP+" dB")
+        print("RCP: "+str(self.CounterValue_RCP)+" dB")
         self.select_option_RCP()
 
     def next_option_Confirmacion(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
