@@ -1,0 +1,14 @@
+# Entornos virtuales
+venv/
+ENV/
+env/
+bin/
+include/
+lib/
+pyvenv.cfg
+*.venv
+
+# Archivos de pytest
+.cache/
+.pytest_cache/
+*.pyc
