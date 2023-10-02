@@ -39,6 +39,7 @@ class MenuHandler:
         self.Menu_Option_fr = 0
         self.fr_mult = 1
         self.CounterValue_Option_fr = 0
+        self.magnitud = "Hz"
         self.counter = 0
         self.serial = serial
         self.device = device
@@ -74,7 +75,7 @@ class MenuHandler:
     
     def display_option_frecuencia(self):
         with canvas(self.device) as draw: 
-            draw.text((10, 0), f"Frequency:", font=font, fill="white")
+            draw.text((10, 0), "Frequency:  "+self.magnitud, font=font, fill="white")
             draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
             for i, option in enumerate(self.options_frecuencia):
                 x_position = 90 - i * 8
@@ -178,6 +179,7 @@ class MenuHandler:
                 # y lo que hacemos es que cada vez que pulsemos generaremos un multiplicador por 10 hasta llegar a Gz que es 10*10 a 9
                 # Este es el de hz x 1 
                 if self.Menu_Option_fr == 0:
+                    self.magnitud = "Hz"
                     self.fr_mult = 1
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 1:
@@ -187,6 +189,7 @@ class MenuHandler:
                     self.fr_mult = 100
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 3:
+                    self.magnitud = "KHz"
                     self.fr_mult = 1000
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 4:
@@ -196,16 +199,18 @@ class MenuHandler:
                     self.fr_mult = 100000
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 6:
+                    self.magnitud = "MHz"
                     self.fr_mult = 1000000
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 7:
                     self.fr_mult = 10000000
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 8:
-                    self.fr_mult = 10000000
+                    self.fr_mult = 100000000
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 9:
-                    self.fr_mult = 100000000
+                    self.magnitud = "GHz"
+                    self.fr_mult = 1000000000
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 10:
                     self.fr_mult = 1000000000
