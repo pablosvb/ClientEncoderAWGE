@@ -179,10 +179,42 @@ class MenuHandler:
                 # ahora entramos en las opciones que hace el boton en este menu de Frecuencia:
                 # y lo que hacemos es que cada vez que pulsemos generaremos un multiplicador por 10 hasta llegar a Gz que es 10*10 a 9
                 # Este es el de hz x 1 
-                if self.Menu_Option_fr = 0:
+                if self.Menu_Option_fr == 0:
                     self.fr_mult = 1
                     self.select_option_Fr()
-
+                elif self.Menu_Option_fr == 1:
+                    self.fr_mult = 10
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 2:
+                    self.fr_mult = 100
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 3:
+                    self.fr_mult = 1000
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 4:
+                    self.fr_mult = 10000
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 5:
+                    self.fr_mult = 100000
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 6:
+                    self.fr_mult = 1000000
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 7:
+                    self.fr_mult = 10000000
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 8:
+                    self.fr_mult = 10000000
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 9:
+                    self.fr_mult = 100000000
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 10:
+                    self.fr_mult = 1000000000
+                    self.select_option_Fr()
+                elif self.Menu_Option_fr == 11:
+                    self.fr_mult = 1000000000
+                    self.select_option_Fr()
                     
                             # aceptaremos lo que tengamos en el menu.
 
