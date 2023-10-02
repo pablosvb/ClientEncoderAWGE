@@ -180,12 +180,12 @@ class MenuHandler:
             else:
                 if self.menu == 0 : # Estariamos en el menu principal y accederiamos a los primeros submenus
                     self.select_option()
-                elif self.menu == 1 :
-                                    # aceptaremos lo que tengamos en el menu.
+                #elif self.menu == 1 :
+                    
+                            # aceptaremos lo que tengamos en el menu.
 
 
     def run(self):
-       
         current_val = 0
         while True:
             try:
