@@ -118,10 +118,9 @@ class MenuHandler:
         # Aquí defines lo que ocurre cuando se selecciona una opción
         selected = self.options_menu[self.Menu0_option]
         # En lugar de imprimir en consola, muestra en la OLED:
-        with canvas(self.device) as draw:
-            if selected == "Frecuencia":
-                self.menu=1
-                self.select_option_Fr()
+        if selected == "Frecuencia":
+            self.menu=1
+            self.select_option_Fr()
 
     def select_option_Fr(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
