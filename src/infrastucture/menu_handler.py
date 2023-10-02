@@ -69,6 +69,10 @@ class MenuHandler:
         self.Menu_option_RCP = 0
         self.CounterValue_RCP = 0
 
+        # Variavles menu RCP
+        self.Menu_option_LCP = 0
+        self.CounterValue_LCP = 0
+
 
         # Variables menu confirmacion:
         self.Menu_option_confirmacion = 0
@@ -125,14 +129,9 @@ class MenuHandler:
     
     def display_option_LCP(self):
         with canvas(self.device) as draw: 
-            draw.text((10, 0), "Frecuencia:  "+self.magnitud, font=font, fill="white")
-            draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
-            for i, option in enumerate(self.options_frecuencia):
-                x_position = 90 - i * 8
-                if i == self.Menu_Option_fr:
-                    draw.text((x_position, 40), "▲" , font=font, fill="white")
-                else:
-                    draw.text((x_position, 40), " " , font=font, fill="white")
+            draw.text((10, 0), "Atenuador LCP:", font=font, fill="white")
+            draw.text((50,30),str(self.CounterValue_LCP)+" dB",font=font, fill="white")
+    
     
     def display_option_ALC(self):
         with canvas(self.device) as draw: 
@@ -170,8 +169,18 @@ class MenuHandler:
                         draw.text((x_position, 50), "▲" , font=font, fill="white")
                     else:
                         draw.text((x_position, 50), " " , font=font, fill="white")
-            if tipo == 2: #no indica que el cambio es de LCP
+            if tipo == 2: #no indica que el cambio es de RCP
                 draw.text((8,12),"Atenuacion RCP:",font=font, fill="white")
+                draw.text((50,25),str(variable)+"dB",font=font, fill="white")
+                draw.text((30,40),"SI          NO",font=font, fill="white")
+                for i, option in enumerate(self.options_confirmacion):
+                    x_position = 85 - i * 55
+                    if i == self.Menu_option_confirmacion:
+                        draw.text((x_position, 50), "▲" , font=font, fill="white")
+                    else:
+                        draw.text((x_position, 50), " " , font=font, fill="white")
+            if tipo == 3: #no indica que el cambio es de LCP
+                draw.text((8,12),"Atenuacion LCP:",font=font, fill="white")
                 draw.text((50,25),str(variable)+"dB",font=font, fill="white")
                 draw.text((30,40),"SI          NO",font=font, fill="white")
                 for i, option in enumerate(self.options_confirmacion):
@@ -226,6 +235,20 @@ class MenuHandler:
         print("RCP: "+str(self.CounterValue_RCP)+" dB")
         self.select_option_RCP()
 
+    def next_option_LCP(self):
+        self.CounterValue_LCP += 1
+        if self.CounterValue_LCP > 31 :
+            self.CounterValue_LCP = 0
+        print("RCP: "+str(self.CounterValue_LCP)+" dB")
+        self.select_option_LCP()
+
+    def previous_option_LCP(self):
+        self.CounterValue_LCP -= 1
+        if self.CounterValue_LCP < 0:
+            self.CounterValue_LCP = 31
+        print("RCP: "+str(self.CounterValue_LCP)+" dB")
+        self.select_option_LCP()
+
     def next_option_Confirmacion(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
         self.Menu_option_confirmacion += 1
         if self.Menu_option_confirmacion > 1 :
@@ -271,7 +294,7 @@ class MenuHandler:
         # Aquí defines lo que ocurre cuando se selecciona una opción
         #selected = self.options0[self.Menu0_option]
         # En lugar de imprimir en consola, muestra en la OLED:
-        self.display_option_frecuencia()
+        self.display_option_LCP()
 
     def select_option_ALC(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
@@ -303,9 +326,9 @@ class MenuHandler:
                     self.next_option_Fr()
                 elif self.menu == 2:
                     self.next_option_RCP()
-                elif self.menu == 1:
-                    self.next_option_Fr()
-                elif self.menu == 1:
+                elif self.menu == 3:
+                    self.next_option_LCP()
+                elif self.menu == 4:
                     self.next_option_Fr()
                 elif self.menu == 10:
                     self.next_option_Confirmacion()
@@ -321,6 +344,8 @@ class MenuHandler:
                     self.previous_option_Fr()
                 elif self.menu == 2:
                     self.previous_option_RCP()
+                elif self.menu == 3:
+                    self.previous_option_LCP()
                 elif self.menu == 10:
                     self.next_option_Confirmacion()
                 else:
@@ -339,6 +364,8 @@ class MenuHandler:
             self.display_Confirmacion(self.tipo,self.CounterValue_Option_fr)
         elif self.tipo == 2:
             self.display_Confirmacion(self.tipo,self.CounterValue_RCP)
+        elif self.tipo == 3:
+            self.display_Confirmacion(self.tipo,self.CounterValue_LCP)
 
 
         
@@ -425,6 +452,12 @@ class MenuHandler:
                 # para esto cargamos un menu de confirmacion: ese menu va a ser el valor 10 de la variable menu:
                 self.menu = 10
                 self.menu_confirmacion()
+            elif self.menu == 3:
+                # codigo para LCP
+                self.tipo=3
+                # para esto cargamos un menu de confirmacion: ese menu va a ser el valor 10 de la variable menu:
+                self.menu = 10
+                self.menu_confirmacion()
 
             elif self.menu == 10:
                 if self.tipo == 1: #Confirmamos la configuracion de Frecuencia.
@@ -438,6 +471,7 @@ class MenuHandler:
                         print("Frecuencia modificada:"+str(self.CounterValue_Option_fr)+"Hz")
                         self.menu=0
                         self.display_option()
+
                 if self.tipo == 2: # Confirmamos la configuracion de RCP
                     if self.Menu_option_confirmacion == 0 :
                         # la confirmacion es negativa por lo que salimos sin hacer nada.
@@ -446,7 +480,19 @@ class MenuHandler:
                         self.display_option()
                     else:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
-                        print("RCP modificada:"+str(self.CounterValue_Option_fr)+"dB")
+                        print("RCP modificada:"+str(self.CounterValue_RCP)+"dB")
+                        self.menu=0
+                        self.display_option()
+
+                if self.tipo == 3: # Confirmamos la configuracion de LCP
+                    if self.Menu_option_confirmacion == 0 :
+                        # la confirmacion es negativa por lo que salimos sin hacer nada.
+                        print("modificacion de LCP cancelada")
+                        self.menu=0
+                        self.display_option()
+                    else:
+                        # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
+                        print("LCP modificada:"+str(self.CounterValue_LCP)+"dB")
                         self.menu=0
                         self.display_option()
             
