@@ -14,7 +14,6 @@ class cliente():
         except KeyboardInterrupt:
             pass
         finally:
-            while True:
-                Conection.conexion("127.0.0.1",7000)
+            Conection.conexion("127.0.0.1",7000)
 
 
