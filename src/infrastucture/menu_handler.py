@@ -76,7 +76,7 @@ class MenuHandler:
         with canvas(self.device) as draw: 
             for i, option in enumerate(self.options_frecuencia):
                 x_position = i * 12
-                if i == self.Menu0_option:
+                if i == self.Menu_Option_fr:
                     draw.text((x_position, 60), "▲" , font=font, fill="white")
                 else:
                     draw.text((x_position, 60), " " , font=font, fill="white")
@@ -99,23 +99,17 @@ class MenuHandler:
 
     def next_option_Fr(self):
         self.CounterValue_Option_fr += 1*self.fr_mult
-        self.Menu_Option_fr += 1
-        if self.Menu_Option_fr == len(self.options_frecuencia):
-            self.Menu_Option_fr = 0
-        if self.CounterValue_Option_fr == 20000000000 :
+        if self.CounterValue_Option_fr > 20000000000 :
             self.CounterValue_Option_fr = 0
         print("Menu_opcion_fr: "+ str(self.Menu_Option_fr) + " value fr: "+"{:011}".format(self.CounterValue_Option_fr)+"Hz")
-        self.display_option_frecuencia()
+        self.select_option_Fr()
 
     def previous_option_Fr(self):
         self.CounterValue_Option_fr -= 1 * self.fr_mult
-        self.Menu_Option_fr -= 1
-        if self.Menu_Option_fr < 0:
-            self.Menu_Option_fr = len(self.options_frecuencia) - 1
         if self.CounterValue_Option_fr < 0:
             self.CounterValue_Option_fr = 20000000000
         print("Menu_opcion_fr: "+str(self.Menu_Option_fr) + " value fr: "+"{:011}".format(self.CounterValue_Option_fr)+"Hz")
-        self.display_option_frecuencia()
+        self.select_option_Fr()
 
 
     def select_option(self):
@@ -133,7 +127,8 @@ class MenuHandler:
         with canvas(self.device) as draw:
             draw.text((0, 0), f"Frequency:", font=font, fill="white")
             draw.text((0,50),"{:011}".format(self.Menu_Option_fr)+"Hz")
-            
+        
+        self.display_option_frecuencia()
 
         
     def handle_encoder(self, channel):
@@ -177,6 +172,10 @@ class MenuHandler:
                 self.select_option()
             elif self.menu == 1:
                 # ahora entramos en las opciones que hace el boton en este menu de Frecuencia:
+                # cada vez que pulsemo en este menu aumentamos el multiplicador.
+                self.Menu_Option_fr += 1
+                if self.Menu_Option_fr == len(self.options_frecuencia):
+                    self.Menu_Option_fr = 0
                 # y lo que hacemos es que cada vez que pulsemos generaremos un multiplicador por 10 hasta llegar a Gz que es 10*10 a 9
                 # Este es el de hz x 1 
                 if self.Menu_Option_fr == 0:
