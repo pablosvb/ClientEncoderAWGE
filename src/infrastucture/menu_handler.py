@@ -75,9 +75,9 @@ class MenuHandler:
     def display_option_frecuencia(self):
         with canvas(self.device) as draw: 
             draw.text((0, 0), f"Frequency:", font=font, fill="white")
-            draw.text((30,0),"{:011}".format(self.CounterValue_Option_fr)+"Hz")
+            draw.text((0,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
             for i, option in enumerate(self.options_frecuencia):
-                x_position = 168 - i * 10
+                x_position = 128 - i * 10
                 if i == self.Menu_Option_fr:
                     draw.text((x_position, 50), "▲" , font=font, fill="white")
                 else:
