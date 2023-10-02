@@ -242,17 +242,17 @@ class MenuHandler:
             self.menu=1
             self.select_option_Fr()
         elif selected == "Att_RCP":
-            self.menu=1
+            self.menu=2
             self.select_option_RCP()
         elif selected == "Att_LCP":
-            self.menu=1
+            self.menu=3
             self.select_option_LCP()
         
         elif selected == "ALC_Mode":
-            self.menu=1
+            self.menu=4
             self.select_option_ALC()
         elif selected == "Status":
-            self.menu=1
+            self.menu=5
             self.select_option_Status()
 
     def select_option_Fr(self):
