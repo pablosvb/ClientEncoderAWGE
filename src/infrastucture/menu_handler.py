@@ -171,8 +171,8 @@ class MenuHandler:
                     else:
                         draw.text((x_position, 50), " " , font=font, fill="white")
             if tipo == 2: #no indica que el cambio es de LCP
-                draw.text((22,12),"Atenuacion RCP:",font=font, fill="white")
-                draw.text((10,25),str(variable)+"dB",font=font, fill="white")
+                draw.text((8,12),"Atenuacion RCP:",font=font, fill="white")
+                draw.text((40,25),str(variable)+"dB",font=font, fill="white")
                 draw.text((30,40),"SI          NO",font=font, fill="white")
                 for i, option in enumerate(self.options_confirmacion):
                     x_position = 85 - i * 55
