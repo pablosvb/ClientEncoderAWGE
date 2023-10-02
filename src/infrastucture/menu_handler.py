@@ -116,7 +116,7 @@ class MenuHandler:
             draw.text((2, 0), "Quieres confirmar?  ", font=font, fill="white")
             if tipo == 1: #nos indica que el cambio es de frecuencia
                 draw.text((22,12),"Frecuencia:",font=font, fill="white")
-                draw.text((18,25),str(variable)+"Hz",font=font, fill="white")
+                draw.text((10,25),"{:011}".format(variable)+"Hz",font=font, fill="white")
                 draw.text((30,40),"SI          NO",font=font, fill="white")
             for i, option in enumerate(self.options_confirmacion):
                 x_position = 85 - i * 55
