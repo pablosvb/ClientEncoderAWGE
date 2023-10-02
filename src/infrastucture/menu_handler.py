@@ -74,8 +74,10 @@ class MenuHandler:
     
     def display_option_frecuencia(self):
         with canvas(self.device) as draw: 
+            draw.text((0, 0), f"Frequency:", font=font, fill="white")
+            draw.text((0,20),"{:011}".format(self.CounterValue_Option_fr)+"Hz")
             for i, option in enumerate(self.options_frecuencia):
-                x_position = i * 12
+                x_position = i * 30
                 if i == self.Menu_Option_fr:
                     draw.text((x_position, 30), "▲" , font=font, fill="white")
                 else:
@@ -125,9 +127,6 @@ class MenuHandler:
         # Aquí defines lo que ocurre cuando se selecciona una opción
         #selected = self.options0[self.Menu0_option]
         # En lugar de imprimir en consola, muestra en la OLED:
-        with canvas(self.device) as draw:
-            draw.text((0, 0), f"Frequency:", font=font, fill="white")
-            draw.text((0,20),"{:011}".format(self.CounterValue_Option_fr)+"Hz")
         
         self.display_option_frecuencia()
 
