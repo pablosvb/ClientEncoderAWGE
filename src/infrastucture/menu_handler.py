@@ -54,6 +54,7 @@ class MenuHandler:
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
         self.options_confirmacion =["SI","NO"]
         # variables menu principal
+        self.menu = 0
         self.Menu0_option = 0
         # Variables menu frecuencia 
         self.Menu_Option_fr = 0
