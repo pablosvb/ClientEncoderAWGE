@@ -1,6 +1,6 @@
 from src.infrastucture.Conection import Conection
 import threading
-from menu_handler import MenuHandler  # Importar la clase desde el archivo
+from .menu_handler import MenuHandler  # Importar la clase desde el archivo
 
 class cliente():
 
