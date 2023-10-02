@@ -119,7 +119,7 @@ class MenuHandler:
                 draw.text((18,25),str(variable)+"Hz",font=font, fill="white")
                 draw.text((30,40),"SI          NO",font=font, fill="white")
             for i, option in enumerate(self.options_confirmacion):
-                x_position = 80 - i * 40
+                x_position = 85 - i * 60
                 if i == self.Menu_option_confirmacion:
                     draw.text((x_position, 50), "▲" , font=font, fill="white")
                 else:
