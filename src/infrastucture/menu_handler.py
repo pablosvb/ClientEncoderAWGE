@@ -32,6 +32,9 @@ class MenuHandler:
         self.serial = serial
         self.device = device
          # Configuración de GPIO
+        GPIO.setmode(GPIO.BCM)
+
+        
         GPIO.setup(ENCODER_PIN_A, GPIO.IN,pull_up_down=GPIO.PUD_UP)
         GPIO.setup(ENCODER_PIN_B, GPIO.IN,pull_up_down=GPIO.PUD_UP)
         GPIO.setup(BUTTON_PIN, GPIO.IN,pull_up_down=GPIO.PUD_UP)
