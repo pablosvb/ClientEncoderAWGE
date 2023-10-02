@@ -38,7 +38,7 @@ class MenuHandler:
         self.Menu0_option = 0
         self.Menu_Option_fr = 0
         self.fr_mult = 1
-        self.CounterValue_Option_fr = 0
+        self.CounterValue_Option_fr = 100000000
         self.magnitud = "Hz"
         self.counter = 0
         self.serial = serial
@@ -109,7 +109,7 @@ class MenuHandler:
 
     def previous_option_Fr(self):
         self.CounterValue_Option_fr -= 1 * self.fr_mult
-        if self.CounterValue_Option_fr < 0:
+        if self.CounterValue_Option_fr < 100000000:
             self.CounterValue_Option_fr = 20000000000
         print("Menu_opcion_fr: "+str(self.Menu_Option_fr) + " value fr: "+"{:011}".format(self.CounterValue_Option_fr)+"Hz")
         self.select_option_Fr()
