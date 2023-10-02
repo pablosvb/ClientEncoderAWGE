@@ -167,7 +167,7 @@ class MenuHandler:
         if (end_time - start_time) > 2:  # Si se presionó más de 2 segundos
             self.pulsado_Atras = True
             
-        else:
+        elif(end_time - start_time) > 0.8:
             if self.menu == 0:
                 self.select_option()
             elif self.menu == 1:
