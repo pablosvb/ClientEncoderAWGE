@@ -56,6 +56,9 @@ class MenuHandler:
         self.A = False
         self.B = False
 
+         # Mostrar el menú cuando iniciamos el controlador
+        self.display_option()
+
     def display_option(self):
         with canvas(self.device) as draw: 
             for i, option in enumerate(self.options0):
@@ -126,7 +129,7 @@ class MenuHandler:
 
     def select_option(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
-        selected = self.options0[self.current_option]
+        selected = self.options0[self.Menu0_option]
         # En lugar de imprimir en consola, muestra en la OLED:
         with canvas(self.device) as draw:
             draw.text((0, 0), f"Config {selected}", font=font, fill="white")
@@ -164,23 +167,16 @@ class MenuHandler:
 
     def handle_button(self, channel):
         start_time = time.time()
-        print(len(self.options0))
+        #print(len(self.options0))
         while GPIO.input(BUTTON_PIN) == 0:  # Esperar mientras esté presionado
             time.sleep(0.01)
             
         end_time = time.time()
         if (end_time - start_time) > 2:  # Si se presionó más de 2 segundos
             self.pulsado_Atras = True
-            self.menu -=1 
-            if self.menu == -1:
-                device.hide()
+            
         else:
-            self.menu +=1
-            if self.menu == 0: # estaría la pantalla apagada y la encenderiamos
-                self.show()
-            else:
-                if self.menu == 0 : # Estariamos en el menu principal y accederiamos a los primeros submenus
-                    self.select_option()
+            self.select_option()
                 #elif self.menu == 1 :
                     
                             # aceptaremos lo que tengamos en el menu.
