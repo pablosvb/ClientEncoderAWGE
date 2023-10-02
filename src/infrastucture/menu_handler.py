@@ -52,6 +52,9 @@ class MenuHandler:
     def __init__(self):
         self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "ALC_Mode", "Status"]
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
+        self.option_RCP = [0]
+        self.option_LCP = [0]
+        self.option_ALC = ["Opened", "Closed"]
         self.options_confirmacion =["SI","NO"]
         # variables menu principal
         self.menu = 0
@@ -61,6 +64,10 @@ class MenuHandler:
         self.fr_mult = 1
         self.CounterValue_Option_fr = 100000000
         self.magnitud = "Hz"
+
+        # Variavles menu RCP
+        self.Menu_option_RCP = 0
+        self.CounterValue_RCP = 0
 
 
         # Variables menu confirmacion:
@@ -111,6 +118,45 @@ class MenuHandler:
                 else:
                     draw.text((x_position, 40), " " , font=font, fill="white")
 
+    def display_option_RCP(self):
+        with canvas(self.device) as draw: 
+            draw.text((10, 0), "Atenuador RCP:", font=font, fill="white")
+            draw.text((10,50),str(self.CounterValue_RCP)+" dB",font=font, fill="white")
+    
+    def display_option_LCP(self):
+        with canvas(self.device) as draw: 
+            draw.text((10, 0), "Frecuencia:  "+self.magnitud, font=font, fill="white")
+            draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
+            for i, option in enumerate(self.options_frecuencia):
+                x_position = 90 - i * 8
+                if i == self.Menu_Option_fr:
+                    draw.text((x_position, 40), "▲" , font=font, fill="white")
+                else:
+                    draw.text((x_position, 40), " " , font=font, fill="white")
+    
+    def display_option_ALC(self):
+        with canvas(self.device) as draw: 
+            draw.text((10, 0), "Frecuencia:  "+self.magnitud, font=font, fill="white")
+            draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
+            for i, option in enumerate(self.options_frecuencia):
+                x_position = 90 - i * 8
+                if i == self.Menu_Option_fr:
+                    draw.text((x_position, 40), "▲" , font=font, fill="white")
+                else:
+                    draw.text((x_position, 40), " " , font=font, fill="white")
+    
+    def display_option_Status(self):
+        with canvas(self.device) as draw: 
+            draw.text((10, 0), "Frecuencia:  "+self.magnitud, font=font, fill="white")
+            draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
+            for i, option in enumerate(self.options_frecuencia):
+                x_position = 90 - i * 8
+                if i == self.Menu_Option_fr:
+                    draw.text((x_position, 40), "▲" , font=font, fill="white")
+                else:
+                    draw.text((x_position, 40), " " , font=font, fill="white")
+    
+    
     def display_Confirmacion(self,tipo,variable):
         with canvas(self.device) as draw: 
             draw.text((2, 0), "Quieres confirmar?  ", font=font, fill="white")
@@ -118,12 +164,23 @@ class MenuHandler:
                 draw.text((22,12),"Frecuencia:",font=font, fill="white")
                 draw.text((10,25),"{:011}".format(variable)+"Hz",font=font, fill="white")
                 draw.text((30,40),"SI          NO",font=font, fill="white")
-            for i, option in enumerate(self.options_confirmacion):
-                x_position = 85 - i * 55
-                if i == self.Menu_option_confirmacion:
-                    draw.text((x_position, 50), "▲" , font=font, fill="white")
-                else:
-                    draw.text((x_position, 50), " " , font=font, fill="white")
+                for i, option in enumerate(self.options_confirmacion):
+                    x_position = 85 - i * 55
+                    if i == self.Menu_option_confirmacion:
+                        draw.text((x_position, 50), "▲" , font=font, fill="white")
+                    else:
+                        draw.text((x_position, 50), " " , font=font, fill="white")
+            if tipo == 2: #no indica que el cambio es de LCP
+                draw.text((22,12),"Atenuacion RCP:",font=font, fill="white")
+                draw.text((10,25),str(variable)+"dB",font=font, fill="white")
+                draw.text((30,40),"SI          NO",font=font, fill="white")
+                for i, option in enumerate(self.options_confirmacion):
+                    x_position = 85 - i * 55
+                    if i == self.Menu_option_confirmacion:
+                        draw.text((x_position, 50), "▲" , font=font, fill="white")
+                    else:
+                        draw.text((x_position, 50), " " , font=font, fill="white")
+    
                 
 
 
@@ -155,6 +212,20 @@ class MenuHandler:
         print("Menu_opcion_fr: "+str(self.Menu_Option_fr) + " value fr: "+"{:011}".format(self.CounterValue_Option_fr)+"Hz")
         self.select_option_Fr()
 
+    def next_option_RCP(self):
+        self.CounterValue_RCP += 1
+        if self.CounterValue_RCP > 31 :
+            self.CounterValue_RCP = 0
+        print("RCP: "+self.CounterValue_RCP+" dB")
+        self.select_option_RCP()
+
+    def previous_option_RCP(self):
+        self.CounterValue_RCP -= 1
+        if self.CounterValue_RCP < 0:
+            self.CounterValue_RCP = 31
+        print("RCP: "+self.CounterValue_RCP+" dB")
+        self.select_option_RCP()
+
     def next_option_Confirmacion(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
         self.Menu_option_confirmacion += 1
         if self.Menu_option_confirmacion > 1 :
@@ -170,8 +241,45 @@ class MenuHandler:
         if selected == "Frecuencia":
             self.menu=1
             self.select_option_Fr()
+        elif selected == "Att_RCP":
+            self.menu=1
+            self.select_option_Fr()
+        elif selected == "Att_LCP":
+            self.menu=1
+            self.select_option_Fr()
+        
+        elif selected == "ALC_Mode":
+            self.menu=1
+            self.select_option_Fr()
+        elif selected == "Status":
+            self.menu=1
+            self.select_option_Fr()
 
     def select_option_Fr(self):
+        # Aquí defines lo que ocurre cuando se selecciona una opción
+        #selected = self.options0[self.Menu0_option]
+        # En lugar de imprimir en consola, muestra en la OLED:
+        self.display_option_frecuencia()
+    
+    def select_option_RCP(self):
+        # Aquí defines lo que ocurre cuando se selecciona una opción
+        #selected = self.options0[self.Menu0_option]
+        # En lugar de imprimir en consola, muestra en la OLED:
+        self.display_option_RCP()
+
+    def select_option_LCP(self):
+        # Aquí defines lo que ocurre cuando se selecciona una opción
+        #selected = self.options0[self.Menu0_option]
+        # En lugar de imprimir en consola, muestra en la OLED:
+        self.display_option_frecuencia()
+
+    def select_option_ALC(self):
+        # Aquí defines lo que ocurre cuando se selecciona una opción
+        #selected = self.options0[self.Menu0_option]
+        # En lugar de imprimir en consola, muestra en la OLED:
+        self.display_option_frecuencia()
+
+    def select_option_Status(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
         #selected = self.options0[self.Menu0_option]
         # En lugar de imprimir en consola, muestra en la OLED:
@@ -221,6 +329,8 @@ class MenuHandler:
         # dependiendo de ello mostraremos un solucion u otra:
         if self.tipo == 1:
             self.display_Confirmacion(self.tipo,self.CounterValue_Option_fr)
+        elif self.tipo == 2:
+            self.display_Confirmacion(self.tipo,self.CounterValue_RCP)
 
 
         
@@ -301,15 +411,33 @@ class MenuHandler:
                     self.fr_mult = 1000000000
                     self.select_option_Fr()
                 # aceptaremos lo que tengamos en el menu.
+            elif self.menu == 2:
+                # codigo para RCP
+                self.tipo=2
+                # para esto cargamos un menu de confirmacion: ese menu va a ser el valor 10 de la variable menu:
+                self.menu = 10
+                self.menu_confirmacion()
+
             elif self.menu == 10:
-                if self.Menu_option_confirmacion == 0 :
-                    # la confirmacion es negativa por lo que salimos sin hacer nada.
-                    self.menu=0
-                    self.display_option()
-                else:
-                    # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
-                    self.menu=0
-                    self.display_option()
+                if self.tipo == 1: #Confirmamos la configuracion de Frecuencia.
+                    if self.Menu_option_confirmacion == 0 :
+                        # la confirmacion es negativa por lo que salimos sin hacer nada.
+                        self.menu=0
+                        self.display_option()
+                    else:
+                        # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
+                        self.menu=0
+                        self.display_option()
+                if self.tipo == 2: # Confirmamos la configuracion de RCP
+                    if self.Menu_option_confirmacion == 0 :
+                        # la confirmacion es negativa por lo que salimos sin hacer nada.
+                        self.menu=0
+                        self.display_option()
+                    else:
+                        # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
+                        self.menu=0
+                        self.display_option()
+            
 
     def run(self):
         current_val = 0
