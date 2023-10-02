@@ -301,6 +301,12 @@ class MenuHandler:
                     self.next_option()
                 elif self.menu == 1:
                     self.next_option_Fr()
+                elif self.menu == 2:
+                    self.next_option_RCP()
+                elif self.menu == 1:
+                    self.next_option_Fr()
+                elif self.menu == 1:
+                    self.next_option_Fr()
                 elif self.menu == 10:
                     self.next_option_Confirmacion()
                 else:
@@ -313,6 +319,8 @@ class MenuHandler:
                     self.previous_option()
                 elif self.menu == 1:
                     self.previous_option_Fr()
+                elif self.menu == 2:
+                    self.previous_option_RCP()
                 elif self.menu == 10:
                     self.next_option_Confirmacion()
                 else:
