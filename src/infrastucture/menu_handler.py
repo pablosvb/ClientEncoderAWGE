@@ -160,7 +160,7 @@ class MenuHandler:
         if self.Menu_option_confirmacion > 1 :
             self.Menu_option_confirmacion = 0
         print("Menu_option_confirmacion: "+ str(self.Menu_option_confirmacion))
-        self.menu_confirmacion(self)
+        self.menu_confirmacion()
 
     
     def select_option(self):
@@ -244,7 +244,7 @@ class MenuHandler:
                 self.tipo=1
                 # para esto cargamos un menu de confirmacion: ese menu va a ser el valor 10 de la variable menu:
                 self.menu = 10
-                self.menu_confirmacion(self.tipo)
+                self.menu_confirmacion()
             elif self.menu == 10:
                 if self.Menu_option_confirmacion == 0 :
                     # la confirmacion es negativa por lo que salimos sin hacer nada.
