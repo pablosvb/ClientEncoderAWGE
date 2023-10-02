@@ -104,7 +104,7 @@ class MenuHandler:
             self.Menu_Option_fr = 0
         if self.CounterValue_Option_fr == 20000000000 :
             self.CounterValue_Option_fr = 0
-        print("Menu_opcion_fr: "+self.Menu_Option_fr + " value fr: "+"{:011}".format(self.CounterValue_Option_fr)+"Hz")
+        print("Menu_opcion_fr: "+ str(self.Menu_Option_fr) + " value fr: "+"{:011}".format(self.CounterValue_Option_fr)+"Hz")
         self.display_option_frecuencia()
 
     def previous_option_Fr(self):
@@ -114,7 +114,7 @@ class MenuHandler:
             self.Menu_Option_fr = len(self.options_frecuencia) - 1
         if self.CounterValue_Option_fr < 0:
             self.CounterValue_Option_fr = 20000000000
-        print("Menu_opcion_fr: "+self.Menu_Option_fr + " value fr: "+"{:011}".format(self.CounterValue_Option_fr)+"Hz")
+        print("Menu_opcion_fr: "+str(self.Menu_Option_fr) + " value fr: "+"{:011}".format(self.CounterValue_Option_fr)+"Hz")
         self.display_option_frecuencia()
 
 
