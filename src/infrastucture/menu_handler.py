@@ -34,6 +34,7 @@ class MenuHandler:
         self.options0 = ["Frecuencia", "Att_RCP", "Att_LCP", "ALC_Mode", "Status"]
         self.options1 = [0,0,0,0,0,0,0,0,0,0,0]
         self.num = 0
+        self.menu = 0
         self.Menu0_option = 0
         self.Menu1_Option = 0
         self.counter = 0
