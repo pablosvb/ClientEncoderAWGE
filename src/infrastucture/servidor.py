@@ -1,5 +1,5 @@
 import asyncio
-import application.GPIOFunctions as At
+
 
 HOST, PORT = 'localhost', 111
 
@@ -31,7 +31,7 @@ async def start_server():
     addr = server.sockets[0].getsockname()
     print(f'Servidor iniciado en {addr}')
 
-    At.SetupGPIOS()
+    
     print('GPIOS Configurados')
 
     async with server:
