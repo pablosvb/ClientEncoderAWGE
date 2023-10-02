@@ -146,6 +146,8 @@ class MenuHandler:
                     self.next_option()
                 elif self.menu == 1:
                     self.next_option_Fr()
+                else:
+                    print("Standby")
 
         else:
             print(f"-  : {current_a}   {current_b}")
@@ -154,6 +156,8 @@ class MenuHandler:
                     self.previous_option()
                 elif self.menu == 1:
                     self.previous_option_Fr()
+                else:
+                    print("Standby")
         
         
 
@@ -165,10 +169,17 @@ class MenuHandler:
             
         end_time = time.time()
         if (end_time - start_time) > 2:  # Si se presionó más de 2 segundos
-            self.pulsado_Atras = True
-            
-        elif(end_time - start_time) > 0.2:
+            #denpendiendo del lugar en el que estemos haremos una cosa u otra
+            # si estamos en el menu principal apagaremos la pantalla.
             if self.menu == 0:
+                self.menu = -1
+                self.device.hide()
+
+        elif(end_time - start_time) > 0.1 and (end_time - start_time) < 1.8 :
+            if self.menu == -1:
+                self.device.show()
+                self.menu = 0
+            elif self.menu == 0:
                 self.select_option()
             elif self.menu == 1:
                 # ahora entramos en las opciones que hace el boton en este menu de Frecuencia:
