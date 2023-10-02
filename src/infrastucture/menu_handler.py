@@ -168,14 +168,14 @@ class MenuHandler:
             time.sleep(0.01)
             
         end_time = time.time()
-        if (end_time - start_time) > 2:  # Si se presionó más de 2 segundos
+        if (end_time - start_time) > 1.5:  # Si se presionó más de 5 segundos
             #denpendiendo del lugar en el que estemos haremos una cosa u otra
             # si estamos en el menu principal apagaremos la pantalla.
             if self.menu == 0:
                 self.menu = -1
                 self.device.hide()
 
-        elif(end_time - start_time) > 0.1 and (end_time - start_time) < 1.8 :
+        elif(end_time - start_time) > 0.1 and (end_time - start_time) < 1 :
             if self.menu == -1:
                 self.device.show()
                 self.menu = 0
