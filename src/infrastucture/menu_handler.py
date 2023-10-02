@@ -23,11 +23,19 @@ device = sh1106(serial, width=128, height=64, rotate=0)
 print("size: ", device.bounding_box)
 device.clear()
 
+pulsado_Atras = False
+pulsado_Intro = False
+
+Menu = 0
+
 class MenuHandler:
 
     def __init__(self):
-        self.options = ["Frecuencia", "Att_RCP", "Att_LCP", "ALC_Mode", "Status"]
-        self.current_option = 0
+        self.options0 = ["Frecuencia", "Att_RCP", "Att_LCP", "ALC_Mode", "Status"]
+        self.options1 = [0,0,0,0,0,0,0,0,0,0,0]
+        self.num = 0
+        self.Menu0_option = 0
+        self.Menu1_Option = 0
         self.counter = 0
         self.serial = serial
         self.device = device
@@ -49,37 +57,78 @@ class MenuHandler:
 
     def display_option(self):
         with canvas(self.device) as draw: 
-            for i, option in enumerate(self.options):
+            for i, option in enumerate(self.options0):
                 y_position = i * 12
-                if i == self.current_option:
+                if i == self.Menu0_option:
                     draw.text((0, y_position), "▶ " + option, font=font, fill="white")
                     print(f"-> {option}")
                 else:
                     draw.text((0, y_position), "   " + option, font=font, fill="white")
                     print(f"   {option}")
+    
+    def display_option_lateral(self):
+        with canvas(self.device) as draw: 
+            for i, option in enumerate(self.options1):
+                x_position = i * 12
+                if i == self.Menu0_option:
+                    draw.text((x_position, 40), "▲" + option, font=font, fill="white")
+                    print(f"-> {option}")
+                else:
+                    draw.text((x_position, 40), " " + option, font=font, fill="white")
+                    print(f"   {option}")
+
 
     def next_option(self):
-        self.current_option += 1
-        if self.current_option == len(self.options):
-            self.current_option = 0
-        print(self.current_option)
+        self.Menu0_option += 1
+        if self.Menu0_option == len(self.options0):
+            self.Menu0_option = 0
+        print(self.Menu0_option)
         self.display_option()
 
     def previous_option(self):
-        self.current_option -= 1
+        self.Menu0_option -= 1
         
-        if self.current_option < 0:
-            self.current_option = len(self.options) - 1
-        print(self.current_option)
+        if self.Menu0_option < 0:
+            self.Menu0_option = len(self.options0) - 1
+        print(self.Menu0_option)
+        self.display_option()
+
+    def next_option2(self):
+        self.Menu1_Option += 1
+        if self.Menu1_Option == len(self.options1):
+            self.Menu1_Option = 0
+        print(self.Menu1_Option)
+        self.display_option_lateral()
+
+    def previous_option2(self):
+        self.Menu1_Option -= 1
+        if self.Menu1_Option < 0:
+            self.Menu1_Option = len(self.options1) - 1
+        print(self.Menu1_Option)
+        self.display_option_lateral()
+
+    def next_mas(self):
+        self.num += 1
+        if self.num == 10:
+            self.num = 0
+        print(self.num)
+        self.options1[self.Menu1_Option] = self.num
+        self.display_option()
+
+    def previous_menos(self):
+        self.num -= 1
+        if self.num < 0:
+            self.num =  9
+        print(self.num)
+        self.options1[self.Menu1_Option] = self.num
         self.display_option()
 
     def select_option(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
-        selected = self.options[self.current_option]
+        selected = self.options0[self.current_option]
         # En lugar de imprimir en consola, muestra en la OLED:
         with canvas(self.device) as draw:
-            draw.text((0, 0), f"Config {selected}...", font=font, fill="white")
-        time.sleep(2)  # Mostrar mensaje por 2 segundos, puedes ajustar
+            draw.text((0, 0), f"Config {selected}", font=font, fill="white")
         self.display_option()
         
     def handle_encoder(self, channel):
@@ -93,26 +142,47 @@ class MenuHandler:
         if channel == ENCODER_PIN_A:
             print(f"+  : {current_a}   {current_b}")
             if current_b != current_a:
-                self.next_option()
+                if self.menu == 0:
+                    self.next_option()
+                elif self.menu == 1:
+                    self.next_option2()
+                elif self.menu == 2:
+                    self.next_mas()
+
         else:
             print(f"-  : {current_a}   {current_b}")
             if current_a != current_b:
-                self.previous_option()
+                if self.menu == 0:
+                    self.previous_option()
+                elif self.menu == 1:
+                    self.previous_option2()
+                elif self.menu == 2:
+                    self.previous_menos()
         
         
 
     def handle_button(self, channel):
         start_time = time.time()
-        print(len(self.options))
+        print(len(self.options0))
         while GPIO.input(BUTTON_PIN) == 0:  # Esperar mientras esté presionado
             time.sleep(0.01)
             
         end_time = time.time()
         if (end_time - start_time) > 2:  # Si se presionó más de 2 segundos
-            # Aquí puedes manejar el evento de presionar el botón por mucho tiempo
-            return
-        
-        self.select_option()
+            self.pulsado_Atras = True
+            self.menu -=1 
+            if self.menu == -1:
+                device.hide()
+        else:
+            self.menu +=1
+            if self.menu == 0: # estaría la pantalla apagada y la encenderiamos
+                self.show()
+            else:
+                if self.menu == 0 : # Estariamos en el menu principal y accederiamos a los primeros submenus
+                    self.select_option()
+                elif self.menu == 1 :
+                                    # aceptaremos lo que tengamos en el menu.
+
 
     def run(self):
        
