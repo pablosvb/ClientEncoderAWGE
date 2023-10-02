@@ -47,13 +47,15 @@ class Conection:
                 logger.debug("ERROR 10061: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión, puede que introduzca mal el HOST u/o el PORT")
         
         except Exception as e:
-            error = True;
+            error = True
             logger.debug(f'ERROR: {e}')
         finally:
             try:
                 s.close()
                 if (error == True):
-                    input("Presione Enter para volver a introducir un HOST y un PORT.")
+                    mensaje = input("Presione Enter para volver a introducir un HOST y un PORT.")
+                    if mensaje == "salir":
+                        pass
             except:
                 pass
     
