@@ -185,11 +185,12 @@ class MenuHandler:
                     draw.text((x_position, 50), " " , font=font, fill="white")
     
     def display_option_Status(self):
+        value = self.format_with_spaces(self.frecuencia)
         if self.Menu_option_Status == 0:
             with canvas(self.device) as draw: 
                 draw.rectangle([(0, 0), (127, 25)], outline="white")
                 draw.text((10,0), "Frec. Sintetizador:  ", font=font_status, fill="white")
-                draw.text((17,10),"{:011}".format(self.frecuencia)+" Hz",font=font_status, fill="white")
+                draw.text((17,10),value+" Hz",font=font_status, fill="white")
                 draw.text((0,26), "RF_Enable: "+str(bool(self.rf_enable)), font=font_status, fill="white")
                 #draw.line([(0, 38), (128, 38)], fill="white")
                 draw.text((0,38),"Power: "+str(self.potencia)+" dBm",font=font_status, fill="white")
@@ -235,7 +236,11 @@ class MenuHandler:
                         draw.text((x_position, 50), "▲" , font=font, fill="white")
                     else:
                         draw.text((x_position, 50), " " , font=font, fill="white")
-  
+
+    def format_with_spaces(n):
+        s = "{:011}".format(n)
+        return ' '.join([s[i:i+3] for i in range(0, len(s), 3)])
+
     def next_option(self):
         self.Menu0_option += 1
         if self.Menu0_option == len(self.options_menu):
