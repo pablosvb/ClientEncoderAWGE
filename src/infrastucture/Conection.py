@@ -7,6 +7,9 @@ logger = Logger.Logger()
 
 
 class Conection:
+    def __init__(self,queue):
+        self.queue = queue
+        
 
     def host():
         HOST = input("[38;5;20m Introduce el Host:[92;5;154m")
