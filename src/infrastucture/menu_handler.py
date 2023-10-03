@@ -121,7 +121,7 @@ class MenuHandler:
         time.sleep(4)
         conec = True
         while conec:
-            mensaje = self.queue_c_m.get()
+            mensaje = self.queue_c_m.get(timeout=10)
             if mensaje == "Conectado":
                 conec = False
             else:
