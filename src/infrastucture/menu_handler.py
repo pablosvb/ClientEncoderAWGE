@@ -605,8 +605,9 @@ class MenuHandler:
                 except queue.Empty:
                     valor = "nada"
                 if valor == "error" :
-                    
                     self.display_Erro()
+                elif valor == "conectado":
+                    self.display_option()
 
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
                 pass

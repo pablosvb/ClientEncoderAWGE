@@ -33,7 +33,7 @@ class Conection:
                 logger.debug("Conectando...")
                 s.connect((HOST, PORT))
                 logger.debug(f'Conectado al servidor: {HOST}:{PORT}')
-
+                self.queue_c_m.put("conectado")
                 while not self.terminate_event.is_set():
                     mensaje = self.queue_m_c.get()
                     print("imprimiendo mensaje:"+ mensaje)
