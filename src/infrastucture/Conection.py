@@ -66,6 +66,7 @@ class Conection:
 
             if error and not self.terminate_event.is_set():
                 logger.debug("Esperando para Reconexion ... ")
+                self.queue_c_m.put("error")
                 if mensaje == "salir":
                     self.terminate_event.set()
                 time.sleep(2)

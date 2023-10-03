@@ -129,8 +129,8 @@ class MenuHandler:
 
     def display_Erro(self):
         with canvas(self.device) as draw: 
-            draw.text((10, 20), "Inicializando", font=font, fill="white")
-            draw.text((0,35),"Conectando servidor", font=font, fill="white")
+            draw.text((40, 20), "ERROR", font=font, fill="white")
+            draw.text((0,35),"Conexion servidor", font=font, fill="white")
     
     def display_Logo(self):
         with Image.open(self.image_path) as img:
@@ -600,9 +600,15 @@ class MenuHandler:
         try:
             while not self.terminate_event.is_set():
             # ... tu código ...
-                print("dentro del bucle principal")
+                try:
+                    valor=self.queue_c_m.get(timeout=1)
+                except queue.Empty:
+                    valor = "nada"
+                if valor == "error" :
+                    
+                    self.display_Erro()
+
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
-                time.sleep(2)
                 pass
         except KeyboardInterrupt:
             GPIO.cleanup()
