@@ -320,6 +320,7 @@ class MenuHandler:
             self.menu=4
             self.select_option_ALC()
         elif selected == "Status":
+            self.queue.put("set_status_cm")
             self.menu=5
             self.select_option_Status()
 
@@ -520,6 +521,7 @@ class MenuHandler:
                 else:
                     # la opcion seleccionada es Opened.
                     print("ALC modificado a opened")
+                    self.queue.put("set_alc_mode=opened")
 
                     ## enviamos la canfiguracion al servidor
                     self.menu=0
@@ -541,6 +543,7 @@ class MenuHandler:
                     else:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
                         print("Frecuencia modificada:"+str(self.CounterValue_Option_fr)+"Hz")
+                        self.queue.put("set_rf="+str(self.CounterValue_Option_fr))
                         self.menu=0
                         self.display_option()
 
@@ -553,6 +556,7 @@ class MenuHandler:
                     else:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
                         print("RCP modificada:"+str(self.CounterValue_RCP)+"dB")
+                        self.queue.put("set_att1="+str(self.CounterValue_RCP))
                         self.menu=0
                         self.display_option()
 
@@ -565,6 +569,7 @@ class MenuHandler:
                     else:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
                         print("LCP modificada:"+str(self.CounterValue_LCP)+"dB")
+                        self.queue.put("set_att2="+str(self.CounterValue_LCP))
                         self.menu=0
                         self.display_option()
 
