@@ -322,6 +322,9 @@ class MenuHandler:
         elif selected == "Status":
             print("dentro")
             self.queue.put("get_status_cm")
+            time.sleep(2)
+            valor=self.queue.get()
+            print("valor = "+valor)
             self.menu=5
             self.select_option_Status()
 
