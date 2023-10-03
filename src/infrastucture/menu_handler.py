@@ -122,6 +122,7 @@ class MenuHandler:
         with Image.open(self.image_path) as img:
         # Es posible que desees redimensionar o adaptar la imagen al tamaño específico de tu OLED
             img = img.resize(device.size, Image.LANCZOS)
+            img = img.convert("1")
             device.display(img)
 
     def display_option(self):
