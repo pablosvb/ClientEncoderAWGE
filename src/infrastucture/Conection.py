@@ -27,6 +27,7 @@ class Conection:
         HOST = "127.0.0.1"
         PORT = 7000
         error = False
+        mensaje = ""
         while not self.terminate_event.is_set():  # Principal loop de ejecución
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             try:
