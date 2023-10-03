@@ -166,10 +166,11 @@ class MenuHandler:
                 draw.line([(0, 38), (128, 38)], fill="white")
                 draw.text((0,38),"Power: "+str(self.potencia)+"dB",font=font, fill="white")
                 draw.line([(0, 50), (128, 50)], fill="white")
-                draw.text((0,55), "ALC_Mode:"+self.ALC_mode, font=font, fill="white")
+                draw.text((0,50), "ALC_Mode:"+self.ALC_mode, font=font, fill="white")
         elif self.Menu_option_Status == 1:
             with canvas(self.device) as draw: 
                 draw.text((0, 0), "Att_RCP:  "+str(self.Att_RCP)+"dB", font=font, fill="white")
+                draw.line([(0, 10), (128, 10)], fill="white")
                 draw.text((0, 10), "Att_LCP:  "+str(self.Att_LCP)+"dB", font=font, fill="white")
     
     
