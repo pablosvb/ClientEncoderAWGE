@@ -51,7 +51,8 @@ Menu = 0
 
 class MenuHandler:
 
-    def __init__(self):
+    def __init__(self,queue):
+        self.queue = queue
         self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "ALC_Mode", "Status"]
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
         self.options_ALC = ["Opened", "Closed"]
@@ -221,10 +222,7 @@ class MenuHandler:
                         draw.text((x_position, 50), "▲" , font=font, fill="white")
                     else:
                         draw.text((x_position, 50), " " , font=font, fill="white")
-    
-                
-
-
+  
     def next_option(self):
         self.Menu0_option += 1
         if self.Menu0_option == len(self.options_menu):
@@ -418,9 +416,6 @@ class MenuHandler:
         elif self.tipo == 3:
             self.display_Confirmacion(self.tipo,self.CounterValue_LCP)
 
-
-        
-
     def handle_button(self, channel):
         start_time = time.time()
         #print(len(self.options0))
@@ -516,7 +511,7 @@ class MenuHandler:
                 if self.Menu_option_ALC == 0 :
                     # la opcion seleccionada es CLOSED.
                     print("ALC modificado a closed")
-
+                    queue.put("hola")
                     ## enviamos la canfiguracion al servidor
                     self.menu=0
                     self.display_option()
@@ -570,7 +565,6 @@ class MenuHandler:
                         print("LCP modificada:"+str(self.CounterValue_LCP)+"dB")
                         self.menu=0
                         self.display_option()
-            
 
     def run(self):
         current_val = 0
