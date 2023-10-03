@@ -405,7 +405,7 @@ class MenuHandler:
                 else:
                     print("Standby")
 
-        else:
+        """else:
             print(f"-  : {current_a}   {current_b}")
             if current_a != current_b:
                 if self.menu == 0:
@@ -425,7 +425,7 @@ class MenuHandler:
                 else:
                     print("Standby")
     
-    
+        """
     def menu_confirmacion(self):
         #en esta funcion confirmaremos el tipo de operacion
         # 1 - frecuencia
