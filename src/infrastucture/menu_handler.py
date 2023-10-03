@@ -25,7 +25,6 @@ BUTTON_PIN = GC.S3    # Ajustar según tu conexión
 
 serial = i2c(port=1, address=0x3C)
 device = sh1106(serial, width=128, height=64, rotate=0)
-print("size: ", device.bounding_box)
 device.clear()
 
 pulsado_Atras = False
