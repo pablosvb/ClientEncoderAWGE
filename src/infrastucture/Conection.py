@@ -35,6 +35,7 @@ class Conection:
             while True:
                 # Introducimos los mensajes que se necesiten desde el terminal.
                 mensaje = self.queue.get()
+                print("imprimiendo mensaje:"+ mensaje)
                 s.sendall(mensaje.encode())
                 data = s.recv(1024)
                 if mensaje=="set_status_cm" :
