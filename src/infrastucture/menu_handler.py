@@ -9,9 +9,11 @@ import src.domain.GPIOConstants as GC
 
 # Cargar una fuente TrueType y ajustar su tamaño
 font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Ruta a una fuente ttf en tu sistema, ajusta si es necesario
-font_size = 10
-font = ImageFont.truetype(font_path, font_size)
+font_size = 11
+font_size_status = 10
 
+font = ImageFont.truetype(font_path, font_size)
+font_status = ImageFont.truetype(font_path, font_size_status)
 # Configura los pines GPIO como Entradas para el Encoder.
 
 ENCODER_PIN_A = GC.S1  # Ajustar según tu conexión
@@ -160,18 +162,18 @@ class MenuHandler:
         if self.Menu_option_Status == 0:
             with canvas(self.device) as draw: 
                 draw.rectangle([(0, 0), (127, 25)], outline="white")
-                draw.text((30,0), "Frecuencia:  ", font=font, fill="white")
-                draw.text((17,10),"{:011}".format(self.frecuencia)+"Hz",font=font, fill="white")
-                draw.text((0,26), "RF_Enable: "+str(bool(self.rf_enable)), font=font, fill="white")
+                draw.text((30,0), "Frecuencia:  ", font=font_status, fill="white")
+                draw.text((17,10),"{:011}".format(self.frecuencia)+"Hz",font=font_status, fill="white")
+                draw.text((0,26), "RF_Enable: "+str(bool(self.rf_enable)), font=font_status, fill="white")
                 draw.line([(0, 38), (128, 38)], fill="white")
-                draw.text((0,38),"Power: "+str(self.potencia)+"dB",font=font, fill="white")
+                draw.text((0,38),"Power: "+str(self.potencia)+"dB",font=font_status, fill="white")
                 draw.line([(0, 50), (128, 50)], fill="white")
-                draw.text((0,50), "ALC_Mode:"+self.ALC_mode, font=font, fill="white")
+                draw.text((0,50), "ALC_Mode:"+self.ALC_mode, font=font_status, fill="white")
         elif self.Menu_option_Status == 1:
             with canvas(self.device) as draw: 
-                draw.text((0, 0), "Att_RCP:  "+str(self.Att_RCP)+"dB", font=font, fill="white")
+                draw.text((0, 0), "Att_RCP:  "+str(self.Att_RCP)+"dB", font=font_status, fill="white")
                 draw.line([(0, 15), (128, 15)], fill="white")
-                draw.text((0, 15), "Att_LCP:  "+str(self.Att_LCP)+"dB", font=font, fill="white")
+                draw.text((0, 15), "Att_LCP:  "+str(self.Att_LCP)+"dB", font=font_status, fill="white")
     
     
     def display_Confirmacion(self,tipo,variable):
