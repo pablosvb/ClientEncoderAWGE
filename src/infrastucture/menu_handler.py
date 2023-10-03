@@ -6,6 +6,8 @@ from luma.oled.device import sh1106
 from PIL import ImageFont, ImageDraw, Image
 import RPi.GPIO as GPIO
 import src.domain.GPIOConstants as GC
+from queue import Queue
+
 
 # Cargar una fuente TrueType y ajustar su tamaño
 font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Ruta a una fuente ttf en tu sistema, ajusta si es necesario
@@ -511,7 +513,7 @@ class MenuHandler:
                 if self.Menu_option_ALC == 0 :
                     # la opcion seleccionada es CLOSED.
                     print("ALC modificado a closed")
-                    queue.put("hola")
+                    self.queue.put("set_alc_mode=closed")
                     ## enviamos la canfiguracion al servidor
                     self.menu=0
                     self.display_option()
@@ -571,6 +573,7 @@ class MenuHandler:
         while True:
             try:
                 while True:
+
                     pass
         
             except KeyboardInterrupt:

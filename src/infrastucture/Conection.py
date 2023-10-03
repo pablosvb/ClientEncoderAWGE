@@ -2,24 +2,27 @@ import socket
 import json
 
 from src.application import Logger
+from queue import Queue
+
 
 logger = Logger.Logger()
 
 
 class Conection:
     def __init__(self,queue):
+        self 
         self.queue = queue
         
 
-    def host():
+    def host(self):
         HOST = input("[38;5;20m Introduce el Host:[92;5;154m")
         return HOST
     
-    def port():
+    def port(self):
         PORT = int (input("[38;5;20m Introduce el Puerto:[92;5;154m"))
         return PORT
     
-    def conexion(HOST,PORT):
+    def conexion(self,HOST,PORT):
         try:
             error = False;
             logger.debug("Conectando...")
@@ -29,7 +32,7 @@ class Conection:
             
             while True:
                 # Introducimos los mensajes que se necesiten desde el terminal.
-                mensaje = ""
+                mensaje = self.queue.get()
                 s.sendall(mensaje.encode())
                 data = s.recv(1024)
                 print(f'[38;5;33m Server: [92;5;92m{data.decode()}')
