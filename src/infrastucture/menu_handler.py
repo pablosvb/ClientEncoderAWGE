@@ -52,8 +52,6 @@ class MenuHandler:
     def __init__(self):
         self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "ALC_Mode", "Status"]
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
-        self.option_RCP = [0]
-        self.option_LCP = [0]
         self.options_ALC = ["Opened", "Closed"]
         self.options_confirmacion =["SI","NO"]
         # variables menu principal
@@ -77,6 +75,16 @@ class MenuHandler:
         self.Menu_option_ALC = 0
         self.CounterValue_ALC = 0
 
+        # Variables menu Status
+        self.Menu_option_Status = 0
+
+        self.frecuencia = 0 
+        self.rf_enable = 0
+        self.potencia = 0
+        self.Att_RCP = 0
+        self.Att_LCP = 0
+        self.ALC_mode = "Opened" 
+        
 
         # Variables menu confirmacion:
         self.Menu_option_confirmacion = 0
@@ -149,15 +157,17 @@ class MenuHandler:
                     draw.text((x_position, 50), " " , font=font, fill="white")
     
     def display_option_Status(self):
-        with canvas(self.device) as draw: 
-            draw.text((10, 0), "Frecuencia:  "+self.magnitud, font=font, fill="white")
-            draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
-            for i, option in enumerate(self.options_frecuencia):
-                x_position = 90 - i * 8
-                if i == self.Menu_Option_fr:
-                    draw.text((x_position, 40), "▲" , font=font, fill="white")
-                else:
-                    draw.text((x_position, 40), " " , font=font, fill="white")
+        if self.Menu_option_Status == 0:
+            with canvas(self.device) as draw: 
+                draw.text((10, 0), "Frecuencia:  ", font=font, fill="white")
+                draw.text((10,20),"{:011}".format(self.frecuencia)+"Hz",font=font, fill="white")
+                draw.text((10,30), "RF_Enable: "+str(bool(self.rf_enable)), font=font, fill="white")
+                draw.text((10,50),"Power: "+str(self.potencia)+"dB",font=font, fill="white")
+        elif self.Menu_option_Status == 1:
+            with canvas(self.device) as draw: 
+                draw.text((10, 0), "Att_RCP:  "+str(self.Att_RCP)+"dB", font=font, fill="white")
+                draw.text((10, 10), "Att_LCP:  "+str(self.Att_LCP)+"dB", font=font, fill="white")
+                draw.text((10, 20), "ALC_Mode:  "+self.ALC_mode, font=font, fill="white")
     
     
     def display_Confirmacion(self,tipo,variable):
@@ -260,6 +270,13 @@ class MenuHandler:
         print("Menu_option_confirmacion: "+ str(self.Menu_option_ALC))
         self.select_option_ALC()
 
+    def next_option_Status(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
+        self.Menu_option_Status += 1
+        if self.Menu_option_Status > 1 :
+            self.Menu_option_Status = 0
+        print("Menu_option_Status: "+ str(self.Menu_option_Status))
+        self.select_option_Status()
+
     def next_option_Confirmacion(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
         self.Menu_option_confirmacion += 1
         if self.Menu_option_confirmacion > 1 :
@@ -316,7 +333,7 @@ class MenuHandler:
         # Aquí defines lo que ocurre cuando se selecciona una opción
         #selected = self.options0[self.Menu0_option]
         # En lugar de imprimir en consola, muestra en la OLED:
-        self.display_option_frecuencia()
+        self.display_option_Status()
 
         
     def handle_encoder(self, channel):
@@ -340,6 +357,8 @@ class MenuHandler:
                     self.next_option_LCP()
                 elif self.menu == 4:
                     self.next_option_ALC()
+                elif self.menu == 5:
+                    self.next_option_Status()
                 elif self.menu == 10:
                     self.next_option_Confirmacion()
                 else:
@@ -358,6 +377,8 @@ class MenuHandler:
                     self.previous_option_LCP()
                 elif self.menu == 4:
                     self.next_option_ALC()
+                elif self.menu == 5:
+                    self.next_option_Status()
                 elif self.menu == 10:
                     self.next_option_Confirmacion()
                 else:
@@ -487,6 +508,10 @@ class MenuHandler:
                     self.menu=0
                     self.display_option()
 
+            elif self.menu == 5:
+                # codigo para Status, es solo de visualizacion asique salimos si pulsamos.
+                self.menu=0
+                self.display_option()
 
 
             elif self.menu == 10:
