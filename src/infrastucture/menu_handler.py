@@ -117,8 +117,28 @@ class MenuHandler:
         self.image_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/logo.png'
        
         self.display_Logo()
-        time.sleep(2)
+        # tiempo para el encendido y todas las conexiones 
+        time.sleep(4)
+        conec = False
+        while conec:
+            mensaje = self.queue_c_m.get()
+            if mensaje == "Conectado":
+                conec = True
+            else:
+                self.display_Erro()
+
         self.display_option()
+
+
+    def display_Solv(self):
+        with canvas(self.device) as draw: 
+            draw.text((10, 20), "Inicializando", font=font, fill="white")
+            draw.text((0,40),"Servidor conectado", font=font, fill="white")    
+
+    def display_Erro(self):
+        with canvas(self.device) as draw: 
+            draw.text((10, 20), "Inicializando", font=font, fill="white")
+            draw.text((0,35),"Conectando servidor", font=font, fill="white")
     
     def display_Logo(self):
         with Image.open(self.image_path) as img:
