@@ -24,6 +24,8 @@ class Conection:
     
     def conexion(self,HOST,PORT):
         try:
+            HOST = "127.0.0.1"
+            PORT = 7000
             error = False;
             logger.debug("Conectando...")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
