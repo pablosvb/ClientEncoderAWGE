@@ -73,6 +73,10 @@ class MenuHandler:
         self.Menu_option_LCP = 0
         self.CounterValue_LCP = 0
 
+        # Variables menu ALC
+        self.Menu_option_ALC = 0
+        self.CounterValue_ALC = 0
+
 
         # Variables menu confirmacion:
         self.Menu_option_confirmacion = 0
@@ -135,14 +139,14 @@ class MenuHandler:
     
     def display_option_ALC(self):
         with canvas(self.device) as draw: 
-            draw.text((10, 0), "Frecuencia:  "+self.magnitud, font=font, fill="white")
-            draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
-            for i, option in enumerate(self.options_frecuencia):
-                x_position = 90 - i * 8
-                if i == self.Menu_Option_fr:
-                    draw.text((x_position, 40), "▲" , font=font, fill="white")
+            draw.text((10, 0), "Modo AlC:  "+self.magnitud, font=font, fill="white")
+            draw.text((30,40),"Opened     Closed",font=font, fill="white")
+            for i, option in enumerate(self.options_confirmacion):
+                x_position = 85 - i * 55
+                if i == self.Menu_option_confirmacion:
+                    draw.text((x_position, 50), "▲" , font=font, fill="white")
                 else:
-                    draw.text((x_position, 40), " " , font=font, fill="white")
+                    draw.text((x_position, 50), " " , font=font, fill="white")
     
     def display_option_Status(self):
         with canvas(self.device) as draw: 
@@ -249,6 +253,13 @@ class MenuHandler:
         print("RCP: "+str(self.CounterValue_LCP)+" dB")
         self.select_option_LCP()
 
+    def next_option_ALC(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
+        self.Menu_option_ALC += 1
+        if self.Menu_option_ALC > 1 :
+            self.Menu_option_ALC = 0
+        print("Menu_option_confirmacion: "+ str(self.Menu_option_ALC))
+        self.select_option_ALC()
+
     def next_option_Confirmacion(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
         self.Menu_option_confirmacion += 1
         if self.Menu_option_confirmacion > 1 :
@@ -270,7 +281,6 @@ class MenuHandler:
         elif selected == "Att_LCP":
             self.menu=3
             self.select_option_LCP()
-        
         elif selected == "ALC_Mode":
             self.menu=4
             self.select_option_ALC()
@@ -300,7 +310,7 @@ class MenuHandler:
         # Aquí defines lo que ocurre cuando se selecciona una opción
         #selected = self.options0[self.Menu0_option]
         # En lugar de imprimir en consola, muestra en la OLED:
-        self.display_option_frecuencia()
+        self.display_option_ALC()
 
     def select_option_Status(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
@@ -329,7 +339,7 @@ class MenuHandler:
                 elif self.menu == 3:
                     self.next_option_LCP()
                 elif self.menu == 4:
-                    self.next_option_Fr()
+                    self.next_option_ALC()
                 elif self.menu == 10:
                     self.next_option_Confirmacion()
                 else:
@@ -346,6 +356,8 @@ class MenuHandler:
                     self.previous_option_RCP()
                 elif self.menu == 3:
                     self.previous_option_LCP()
+                elif self.menu == 4:
+                    self.next_option_ALC()
                 elif self.menu == 10:
                     self.next_option_Confirmacion()
                 else:
@@ -458,6 +470,24 @@ class MenuHandler:
                 # para esto cargamos un menu de confirmacion: ese menu va a ser el valor 10 de la variable menu:
                 self.menu = 10
                 self.menu_confirmacion()
+            elif self.menu == 3:
+                # codigo para ALC
+                if self.Menu_option_ALC == 0 :
+                    # la opcion seleccionada es CLOSED.
+                    print("ALC modificado a closed")
+
+                    ## enviamos la canfiguracion al servidor
+                    self.menu=0
+                    self.display_option()
+                else:
+                    # la opcion seleccionada es Opened.
+                    print("ALC modificado a opened")
+                    
+                    ## enviamos la canfiguracion al servidor
+                    self.menu=0
+                    self.display_option()
+
+
 
             elif self.menu == 10:
                 if self.tipo == 1: #Confirmamos la configuracion de Frecuencia.
