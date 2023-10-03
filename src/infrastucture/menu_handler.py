@@ -159,7 +159,7 @@ class MenuHandler:
     def display_option_Status(self):
         if self.Menu_option_Status == 0:
             with canvas(self.device) as draw: 
-                draw.rectangle([(0, 0), (128, 25)], outline="white")
+                draw.rectangle([(0, 0), (127, 25)], outline="white")
                 draw.text((25,0), "Frecuencia:  ", font=font, fill="white")
                 draw.text((12,10),"{:011}".format(self.frecuencia)+"Hz",font=font, fill="white")
                 draw.text((0,26), "RF_Enable: "+str(bool(self.rf_enable)), font=font, fill="white")
