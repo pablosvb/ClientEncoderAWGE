@@ -121,6 +121,7 @@ class MenuHandler:
         # tiempo para el encendido y todas las conexiones 
         time.sleep(4)
         conec = True
+        """
         while conec:
             try:
                 mensaje = self.queue_c_m.get(timeout=2)
@@ -132,7 +133,7 @@ class MenuHandler:
                 conec = False
             else:
                 self.display_Erro()
-
+        """
         self.display_option()
 
 
