@@ -54,7 +54,7 @@ class MenuHandler:
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
         self.option_RCP = [0]
         self.option_LCP = [0]
-        self.option_ALC = ["Opened", "Closed"]
+        self.options_ALC = ["Opened", "Closed"]
         self.options_confirmacion =["SI","NO"]
         # variables menu principal
         self.menu = 0
@@ -139,11 +139,11 @@ class MenuHandler:
     
     def display_option_ALC(self):
         with canvas(self.device) as draw: 
-            draw.text((10, 0), "Modo AlC:  "+self.magnitud, font=font, fill="white")
-            draw.text((30,40),"Opened     Closed",font=font, fill="white")
-            for i, option in enumerate(self.options_confirmacion):
+            draw.text((30, 0), "Modo ALC:  ", font=font, fill="white")
+            draw.text((10,40),"Opened   Closed",font=font, fill="white")
+            for i, option in enumerate(self.options_ALC):
                 x_position = 85 - i * 55
-                if i == self.Menu_option_confirmacion:
+                if i == self.Menu_option_ALC:
                     draw.text((x_position, 50), "▲" , font=font, fill="white")
                 else:
                     draw.text((x_position, 50), " " , font=font, fill="white")
@@ -482,7 +482,7 @@ class MenuHandler:
                 else:
                     # la opcion seleccionada es Opened.
                     print("ALC modificado a opened")
-                    
+
                     ## enviamos la canfiguracion al servidor
                     self.menu=0
                     self.display_option()
