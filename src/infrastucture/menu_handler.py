@@ -163,7 +163,9 @@ class MenuHandler:
                 draw.text((25,0), "Frecuencia:  ", font=font, fill="white")
                 draw.text((12,10),"{:011}".format(self.frecuencia)+"Hz",font=font, fill="white")
                 draw.text((0,26), "RF_Enable: "+str(bool(self.rf_enable)), font=font, fill="white")
+                draw.line([(0, 38), (128, 38)], fill="white")
                 draw.text((0,38),"Power: "+str(self.potencia)+"dB",font=font, fill="white")
+                draw.line([(0, 50), (128, 50)], fill="white")
                 draw.text((0,50), "ALC_Mode:"+self.ALC_mode, font=font, fill="white")
         elif self.Menu_option_Status == 1:
             with canvas(self.device) as draw: 
