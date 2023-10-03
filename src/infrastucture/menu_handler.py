@@ -112,7 +112,7 @@ class MenuHandler:
         self.B = False
 
          # Mostrar el menú cuando iniciamos el controlador
-        self.image_path = 'logo.png'
+        self.image_path = '/src/infrastucture/logo.png'
        
         self.display_Logo()
         time.sleep(2)
