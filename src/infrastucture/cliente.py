@@ -21,7 +21,6 @@ class cliente():
             
             conection_thread = threading.Thread(target=connection_instance.conexion)
             conection_thread.start()
-            time.sleep(4)
             menu_thread = threading.Thread(target=menu_handler_instance.run)
             menu_thread.start()
         except KeyboardInterrupt:
