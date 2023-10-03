@@ -30,6 +30,9 @@ device.clear()
 pulsado_Atras = False
 pulsado_Intro = False
 
+DEBOUNCE_TIME = 0.01  # tiempo en segundos, ajusta según sea necesario
+
+last_interrupt_time = 0
 Menu = 0
 
 # diagrama de configuracion de la variable de Menu:
@@ -378,16 +381,19 @@ class MenuHandler:
 
         
     def handle_encoder(self, channel):
-        print(channel)
-
+        global last_interrupt_time
+    
+        # Verifica si la interrupción ocurrió demasiado pronto después de la anterior
+        if time.time() - last_interrupt_time < DEBOUNCE_TIME:
+            return
+        
         current_a = GPIO.input(ENCODER_PIN_A)
         current_b = GPIO.input(ENCODER_PIN_B)
 
-        
-        
         if channel == ENCODER_PIN_A:
             print(f"+  : {current_a}   {current_b}")
             if current_b != current_a:
+            
                 if self.menu == 0:
                     self.next_option()
                 elif self.menu == 1:
@@ -424,7 +430,9 @@ class MenuHandler:
                     self.next_option_Confirmacion()
                 else:
                     print("Standby")
-    
+
+        last_interrupt_time = time.time()  # Actualiza el tiempo de la última interrupción
+
         
     def menu_confirmacion(self):
         #en esta funcion confirmaremos el tipo de operacion
