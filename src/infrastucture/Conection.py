@@ -24,7 +24,7 @@ class Conection:
             error = False;
             logger.debug("Conectando...")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((HOST, PORT))
+            s.connect(("127.0.0.1", 7000))
             logger.debug(f'Conectado al servidor: {HOST}:{PORT}')
             
             while True:
@@ -34,8 +34,6 @@ class Conection:
                 data = s.recv(1024)
                 print(f'[38;5;33m Server: [92;5;92m{data.decode()}')
                     
-                
-
         except socket.gaierror as e:
             error = True
             if e.errno == 11001:
