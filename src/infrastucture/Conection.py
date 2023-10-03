@@ -29,6 +29,7 @@ class Conection:
         mensaje = ""
         while not self.terminate_event.is_set():  # Principal loop de ejecución
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.settimeout(5)  # Establece un timeout de 5 segundos
             try:
                 logger.debug("Conectando...")
                 s.connect((HOST, PORT))
