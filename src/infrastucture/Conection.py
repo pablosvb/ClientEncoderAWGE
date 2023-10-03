@@ -1,6 +1,5 @@
 import socket
-import json
-
+import time 
 from src.application import Logger
 from queue import Queue
 
@@ -23,7 +22,7 @@ class Conection:
         PORT = int (input("[38;5;20m Introduce el Puerto:[92;5;154m"))
         return PORT
     
-    def conexion(self,HOST,PORT):
+    def conexion(self):
         try:
             HOST = "127.0.0.1"
             PORT = 7000
@@ -64,10 +63,12 @@ class Conection:
             try:
                 s.close()
                 if (error == True):
-                    mensaje = input("Presione Enter para volver a introducir un HOST y un PORT.")
+                    logger.debug("Esperando para Reconexion ... ")
                     if mensaje == "salir":
                         self.terminate_event.set()
                         pass
+                    time.sleep(2)
+                    self.conexion()
             except:
                 pass
     
