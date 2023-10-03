@@ -9,7 +9,8 @@ logger = Logger.Logger()
 
 
 class Conection:
-    def __init__(self,queue_c_m,queue_m_c):
+    def __init__(self,queue_c_m,queue_m_c,terminate_event):
+        self.terminate_event = terminate_event
         self.queue_m_c = queue_m_c
         self.queue_c_m = queue_c_m
         
@@ -32,7 +33,7 @@ class Conection:
             s.connect(("127.0.0.1", 7000))
             logger.debug(f'Conectado al servidor: {HOST}:{PORT}')
             
-            while True:
+            while not self.terminate_event.is_set():
                 # Introducimos los mensajes que se necesiten desde el terminal.
                 mensaje = self.queue_m_c.get()
                 print("imprimiendo mensaje:"+ mensaje)
@@ -65,6 +66,7 @@ class Conection:
                 if (error == True):
                     mensaje = input("Presione Enter para volver a introducir un HOST y un PORT.")
                     if mensaje == "salir":
+                        self.terminate_event.set()
                         pass
             except:
                 pass

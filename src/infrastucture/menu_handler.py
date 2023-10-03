@@ -1,4 +1,4 @@
-import threading
+
 import time
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
@@ -48,12 +48,10 @@ Menu = 0
 # 
 #   
 
-
-
-
 class MenuHandler:
 
-    def __init__(self,queue_c_m,queue_m_c):
+    def __init__(self,queue_c_m,queue_m_c,terminate_event):
+        self.terminate_event = terminate_event 
         self.queue_c_m = queue_c_m
         self.queue_m_c = queue_m_c
         self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "ALC_Mode", "Status"]
@@ -587,12 +585,12 @@ class MenuHandler:
                         self.display_option()
 
     def run(self):
-        current_val = 0
-        while True:
-            try:
-                while True:
-
-                    pass
-        
-            except KeyboardInterrupt:
-                GPIO.cleanup()
+        try:
+            while not self.terminate_event.is_set():
+            # ... tu código ...
+            
+            # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
+               pass
+        except KeyboardInterrupt:
+            GPIO.cleanup()
+            self.terminate_event.set()
