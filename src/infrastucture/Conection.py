@@ -33,7 +33,6 @@ class Conection:
                 logger.debug("Conectando...")
                 s.connect((HOST, PORT))
                 logger.debug(f'Conectado al servidor: {HOST}:{PORT}')
-                #self.queue_c_m.put("Conectado")
 
                 while not self.terminate_event.is_set():
                     mensaje = self.queue_m_c.get()
@@ -69,5 +68,6 @@ class Conection:
                 logger.debug("Esperando para Reconexion ... ")
                 if mensaje == "salir":
                     self.terminate_event.set()
+                time.sleep(2)
                 
     
