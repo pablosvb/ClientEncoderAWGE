@@ -101,9 +101,9 @@ class MenuHandler:
         GPIO.setmode(GPIO.BCM)
 
         
-        GPIO.setup(ENCODER_PIN_A, GPIO.IN,pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(ENCODER_PIN_B, GPIO.IN,pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(BUTTON_PIN, GPIO.IN,pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(ENCODER_PIN_A, GPIO.IN)
+        GPIO.setup(ENCODER_PIN_B, GPIO.IN)
+        GPIO.setup(BUTTON_PIN, GPIO.IN)
 
         GPIO.add_event_detect(ENCODER_PIN_A, GPIO.FALLING, callback=self.handle_encoder,bouncetime=200)
         GPIO.add_event_detect(ENCODER_PIN_B, GPIO.FALLING, callback=self.handle_encoder,bouncetime=200)
