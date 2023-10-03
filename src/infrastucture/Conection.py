@@ -40,6 +40,9 @@ class Conection:
                     print("imprimiendo mensaje:"+ mensaje)
                     s.sendall(mensaje.encode())
                     data = s.recv(1024)
+                    if not data:
+                        print("Conexión cerrada por el servidor.")
+                        break
                     if mensaje == "get_status_cm":
                         self.queue_c_m.put(data.decode())
                     print(f'Server:{data.decode()}')
