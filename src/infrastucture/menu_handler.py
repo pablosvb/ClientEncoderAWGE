@@ -520,7 +520,7 @@ class MenuHandler:
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 10:
                     self.magnitud = "10 GHz"
-                    self.fr_mult = 1000000000
+                    self.fr_mult = 10000000000
                     self.select_option_Fr()
                 elif self.Menu_Option_fr == 11:
                     self.fr_mult = 1000000000
