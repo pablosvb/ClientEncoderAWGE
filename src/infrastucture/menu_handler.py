@@ -9,7 +9,7 @@ import src.domain.GPIOConstants as GC
 
 # Cargar una fuente TrueType y ajustar su tamaño
 font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Ruta a una fuente ttf en tu sistema, ajusta si es necesario
-font_size = 11
+font_size = 10
 font = ImageFont.truetype(font_path, font_size)
 
 # Configura los pines GPIO como Entradas para el Encoder.
