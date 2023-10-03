@@ -335,7 +335,7 @@ class MenuHandler:
             self.queue_m_c.put("get_status_cm")
             
             self.menu=5
-            self.select_option_Status()
+            
 
     def select_option_Fr(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
@@ -612,6 +612,8 @@ class MenuHandler:
                     self.ALC_mode = data["ALC"]  
 
                     print("valor = "+valor)
+
+                    self.select_option_Status()
 
 
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
