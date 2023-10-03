@@ -119,11 +119,11 @@ class MenuHandler:
         self.display_Logo()
         # tiempo para el encendido y todas las conexiones 
         time.sleep(4)
-        conec = False
+        conec = True
         while conec:
             mensaje = self.queue_c_m.get()
             if mensaje == "Conectado":
-                conec = True
+                conec = False
             else:
                 self.display_Erro()
 
