@@ -170,7 +170,7 @@ class MenuHandler:
         elif self.Menu_option_Status == 1:
             with canvas(self.device) as draw: 
                 draw.text((0, 0), "Att_RCP:  "+str(self.Att_RCP)+"dB", font=font, fill="white")
-                draw.line([(0, 12), (128, 12)], fill="white")
+                draw.line([(0, 15), (128, 10)], fill="white")
                 draw.text((0, 15), "Att_LCP:  "+str(self.Att_LCP)+"dB", font=font, fill="white")
     
     
