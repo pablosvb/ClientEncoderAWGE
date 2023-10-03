@@ -121,6 +121,7 @@ class MenuHandler:
         # tiempo para el encendido y todas las conexiones 
         time.sleep(4)
         
+        
         self.display_option()
 
 
