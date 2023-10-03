@@ -1,4 +1,5 @@
 
+import queue
 import time
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
@@ -123,7 +124,7 @@ class MenuHandler:
         while conec:
             try:
                 mensaje = self.queue_c_m.get(timeout=2)
-            except self.queue.Empty:
+            except queue.Empty:
                 mensaje = "nada"
             
             if mensaje == "Conectado":
