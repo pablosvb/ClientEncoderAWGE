@@ -9,9 +9,9 @@ logger = Logger.Logger()
 
 
 class Conection:
-    def __init__(self,queue):
-        self 
-        self.queue = queue
+    def __init__(self,queue_c_m,queue_m_c):
+        self.queue_m_c = queue_m_c
+        self.queue_c_m = queue_c_m
         
 
     def host(self):
@@ -34,13 +34,14 @@ class Conection:
             
             while True:
                 # Introducimos los mensajes que se necesiten desde el terminal.
-                mensaje = self.queue.get()
+                mensaje = self.queue_m_c.get()
                 print("imprimiendo mensaje:"+ mensaje)
                 s.sendall(mensaje.encode())
                 data = s.recv(1024)
-                if mensaje=="get_status_cm" :
-                    self.queue.put(data.decode())
+                if mensaje == "get_status_cm":
+                    self.queue_c_m.put(data.decode())
                 print(f'Server:{data.decode()}')
+
                     
         except socket.gaierror as e:
             error = True
