@@ -119,7 +119,7 @@ class MenuHandler:
        
         self.display_Logo()
         # tiempo para el encendido y todas las conexiones 
-        time.sleep(4)
+        time.sleep(2)
         conec = True
         
         while conec:
