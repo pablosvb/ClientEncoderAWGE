@@ -54,9 +54,9 @@ class MenuHandler:
         self.terminate_event = terminate_event 
         self.queue_c_m = queue_c_m
         self.queue_m_c = queue_m_c
-        self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "REF_Clock", "Status"]
+        self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "Ref_Clock", "Status"]
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
-        self.options_ALC = ["External", "Internal"]
+        self.options_ALC = ["", "Internal"]
         self.options_confirmacion =["SI","NO"]
         # variables menu principal
         self.menu = 0
@@ -105,8 +105,8 @@ class MenuHandler:
         GPIO.setup(ENCODER_PIN_B, GPIO.IN,pull_up_down=GPIO.PUD_UP)
         GPIO.setup(BUTTON_PIN, GPIO.IN,pull_up_down=GPIO.PUD_UP)
 
-        GPIO.add_event_detect(ENCODER_PIN_A, GPIO.FALLING, callback=self.handle_encoder,bouncetime=20)
-        GPIO.add_event_detect(ENCODER_PIN_B, GPIO.FALLING, callback=self.handle_encoder,bouncetime=20)
+        GPIO.add_event_detect(ENCODER_PIN_A, GPIO.FALLING, callback=self.handle_encoder,bouncetime=200)
+        GPIO.add_event_detect(ENCODER_PIN_B, GPIO.FALLING, callback=self.handle_encoder,bouncetime=200)
         GPIO.add_event_detect(BUTTON_PIN, GPIO.FALLING, callback=self.handle_button, bouncetime=200)
         self.last_a = GPIO.input(ENCODER_PIN_A)
         self.last_b = GPIO.input(ENCODER_PIN_B)
