@@ -333,17 +333,7 @@ class MenuHandler:
         elif selected == "Status":
             print("dentro")
             self.queue_m_c.put("get_status_cm")
-            valor=self.queue_c_m.get()
-            data = json.loads(valor)
-
-            self.frecuencia = data["rf"] 
-            self.rf_enable = data["enable"] 
-            self.potencia = data["power"] 
-            self.Att_RCP = data["RCP"] 
-            self.Att_LCP = data["LCP"] 
-            self.ALC_mode = data["ALC"]  
-
-            print("valor = "+valor)
+            
             self.menu=5
             self.select_option_Status()
 
@@ -604,10 +594,25 @@ class MenuHandler:
                     valor=self.queue_c_m.get(timeout=1)
                 except queue.Empty:
                     valor = "nada"
+                
                 if valor == "error" :
                     self.display_Erro()
                 elif valor == "conectado":
                     self.display_option()
+                elif valor == "nada":
+                    pass
+                else:
+                    data = json.loads(valor)
+
+                    self.frecuencia = data["rf"] 
+                    self.rf_enable = data["enable"] 
+                    self.potencia = data["power"] 
+                    self.Att_RCP = data["RCP"] 
+                    self.Att_LCP = data["LCP"] 
+                    self.ALC_mode = data["ALC"]  
+
+                    print("valor = "+valor)
+
 
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
                 pass
