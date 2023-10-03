@@ -237,7 +237,7 @@ class MenuHandler:
                     else:
                         draw.text((x_position, 50), " " , font=font, fill="white")
 
-    def format_with_spaces(n):
+    def format_with_spaces(self,n):
         s = "{:011}".format(n)
         return ' '.join([s[i:i+3] for i in range(0, len(s), 3)])
 
