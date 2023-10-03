@@ -19,6 +19,4 @@ class cliente():
             conection_thread.start()
         except KeyboardInterrupt:
             pass
-        finally:
-
-
+        
