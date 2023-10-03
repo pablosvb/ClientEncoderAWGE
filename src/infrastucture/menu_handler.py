@@ -120,8 +120,6 @@ class MenuHandler:
         self.display_Logo()
         # tiempo para el encendido y todas las conexiones 
         time.sleep(4)
-        
-        
         self.display_option()
 
 
@@ -603,9 +601,10 @@ class MenuHandler:
         try:
             while not self.terminate_event.is_set():
             # ... tu código ...
-            
+                print("dentro del bucle principal")
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
-               pass
+                time.sleep(2)
+                pass
         except KeyboardInterrupt:
             GPIO.cleanup()
             self.terminate_event.set()
