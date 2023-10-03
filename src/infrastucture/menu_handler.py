@@ -54,9 +54,9 @@ class MenuHandler:
         self.terminate_event = terminate_event 
         self.queue_c_m = queue_c_m
         self.queue_m_c = queue_m_c
-        self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "ALC_Mode", "Status"]
+        self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "REF_Clock", "Status"]
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
-        self.options_ALC = ["Opened", "Closed"]
+        self.options_ALC = ["External", "Internal"]
         self.options_confirmacion =["SI","NO"]
         # variables menu principal
         self.menu = 0
@@ -176,7 +176,7 @@ class MenuHandler:
     def display_option_ALC(self):
         with canvas(self.device) as draw: 
             draw.text((30, 0), "Modo ALC:  ", font=font, fill="white")
-            draw.text((10,40),"Opened   Closed",font=font, fill="white")
+            draw.text((10,40),"External   Internal",font=font, fill="white")
             for i, option in enumerate(self.options_ALC):
                 x_position = 85 - i * 55
                 if i == self.Menu_option_ALC:
