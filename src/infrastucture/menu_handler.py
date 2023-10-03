@@ -3,7 +3,7 @@ import time
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import sh1106
-from PIL import ImageFont, ImageDraw
+from PIL import ImageFont, ImageDraw, Image
 import RPi.GPIO as GPIO
 import src.domain.GPIOConstants as GC
 
@@ -112,7 +112,17 @@ class MenuHandler:
         self.B = False
 
          # Mostrar el menú cuando iniciamos el controlador
+        self.image_path = 'logo.png'
+       
+        self.display_Logo()
+        time.sleep(2)
         self.display_option()
+    
+    def display_Logo(self):
+        with Image.open(self.image_path) as img:
+        # Es posible que desees redimensionar o adaptar la imagen al tamaño específico de tu OLED
+            img = img.resize(device.size, Image.ANTIALIAS)
+            device.display(img)
 
     def display_option(self):
         with canvas(self.device) as draw: 
@@ -434,6 +444,8 @@ class MenuHandler:
         elif(end_time - start_time) > 0.1 and (end_time - start_time) < 1 :
             if self.menu == -1:
                 self.device.show()
+                self.display_Logo()
+                time.sleep(2)
                 self.menu = 0
             elif self.menu == 0:
                 self.select_option()
