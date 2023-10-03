@@ -37,7 +37,7 @@ class Conection:
                 mensaje = self.queue.get()
                 s.sendall(mensaje.encode())
                 data = s.recv(1024)
-                print(f'[38;5;33m Server: [92;5;92m{data.decode()}')
+                print(f'Server:{data.decode()}')
                     
         except socket.gaierror as e:
             error = True
