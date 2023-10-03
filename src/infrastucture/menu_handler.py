@@ -154,7 +154,7 @@ class MenuHandler:
         with canvas(self.device) as draw: 
             draw.text((10, 0), "Frec:  "+self.magnitud, font=font, fill="white")
             #draw.rectangle([(7, 28), (118, 55)], outline="white")
-            draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+"Hz",font=font, fill="white")
+            draw.text((10,30),"{:011}".format(self.CounterValue_Option_fr)+" Hz",font=font, fill="white")
             for i, option in enumerate(self.options_frecuencia):
                 x_position = 90 - i * 8
                 if i == self.Menu_Option_fr:
