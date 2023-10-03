@@ -7,7 +7,7 @@ from PIL import ImageFont, ImageDraw, Image
 import RPi.GPIO as GPIO
 import src.domain.GPIOConstants as GC
 from queue import Queue
-
+import json
 
 # Cargar una fuente TrueType y ajustar su tamaño
 font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Ruta a una fuente ttf en tu sistema, ajusta si es necesario
@@ -324,6 +324,15 @@ class MenuHandler:
             print("dentro")
             self.queue_m_c.put("get_status_cm")
             valor=self.queue_c_m.get()
+            data = json.loads(valor)
+
+            self.frecuencia = data["rf"] 
+            self.rf_enable = data["enable"] 
+            self.potencia = data["power"] 
+            self.Att_RCP = data["RCP"] 
+            self.Att_LCP = data["LCP"] 
+            self.ALC_mode = data["ALC"]  
+
             print("valor = "+valor)
             self.menu=5
             self.select_option_Status()
