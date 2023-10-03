@@ -470,7 +470,7 @@ class MenuHandler:
                 # para esto cargamos un menu de confirmacion: ese menu va a ser el valor 10 de la variable menu:
                 self.menu = 10
                 self.menu_confirmacion()
-            elif self.menu == 3:
+            elif self.menu == 4:
                 # codigo para ALC
                 if self.Menu_option_ALC == 0 :
                     # la opcion seleccionada es CLOSED.
