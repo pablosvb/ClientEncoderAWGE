@@ -65,7 +65,7 @@ class MenuHandler:
         self.Menu_Option_fr = 0
         self.fr_mult = 1
         self.CounterValue_Option_fr = 100000000
-        self.magnitud = "Hz"
+        self.magnitud = "1 Hz"
 
         # Variavles menu RCP
         self.Menu_option_RCP = 0
