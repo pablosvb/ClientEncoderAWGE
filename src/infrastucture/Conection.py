@@ -37,6 +37,8 @@ class Conection:
                 mensaje = self.queue.get()
                 s.sendall(mensaje.encode())
                 data = s.recv(1024)
+                if mensaje=="set_status_cm" :
+                    self.queue.put(data.decode())
                 print(f'Server:{data.decode()}')
                     
         except socket.gaierror as e:

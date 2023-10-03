@@ -321,6 +321,8 @@ class MenuHandler:
             self.select_option_ALC()
         elif selected == "Status":
             self.queue.put("set_status_cm")
+            valores = self.queue.get()
+            print(valores)
             self.menu=5
             self.select_option_Status()
 
