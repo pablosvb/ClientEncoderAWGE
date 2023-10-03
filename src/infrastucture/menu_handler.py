@@ -127,6 +127,7 @@ class MenuHandler:
             except queue.Empty:
                 mensaje = "nada"
             
+            print("mensaje: "+ mensaje)
             if mensaje == "Conectado":
                 conec = False
             else:
