@@ -38,7 +38,7 @@ class Conection:
                 print("imprimiendo mensaje:"+ mensaje)
                 s.sendall(mensaje.encode())
                 data = s.recv(1024)
-                if mensaje=="set_status_cm" :
+                if mensaje=="get_status_cm" :
                     self.queue.put(data.decode())
                 print(f'Server:{data.decode()}')
                     
