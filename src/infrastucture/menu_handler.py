@@ -159,15 +159,15 @@ class MenuHandler:
     def display_option_Status(self):
         if self.Menu_option_Status == 0:
             with canvas(self.device) as draw: 
-                draw.text((10,0), "RF_Enable: "+str(bool(self.rf_enable)), font=font, fill="white")
-                draw.text((10,10), "Frecuencia:  ", font=font, fill="white")
-                draw.text((10,20),"{:011}".format(self.frecuencia)+"Hz",font=font, fill="white")
-                draw.text((10,40),"Power: "+str(self.potencia)+"dB",font=font, fill="white")
-                draw.text((10,50), "ALC_Mode:"+self.ALC_mode, font=font, fill="white")
+                draw.text((0,0), "RF_Enable: "+str(bool(self.rf_enable)), font=font, fill="white")
+                draw.text((0,10), "Frecuencia:  ", font=font, fill="white")
+                draw.text((0,20),"{:011}".format(self.frecuencia)+"Hz",font=font, fill="white")
+                draw.text((0,40),"Power: "+str(self.potencia)+"dB",font=font, fill="white")
+                draw.text((0,50), "ALC_Mode:"+self.ALC_mode, font=font, fill="white")
         elif self.Menu_option_Status == 1:
             with canvas(self.device) as draw: 
-                draw.text((10, 0), "Att_RCP:  "+str(self.Att_RCP)+"dB", font=font, fill="white")
-                draw.text((10, 10), "Att_LCP:  "+str(self.Att_LCP)+"dB", font=font, fill="white")
+                draw.text((0, 0), "Att_RCP:  "+str(self.Att_RCP)+"dB", font=font, fill="white")
+                draw.text((0, 10), "Att_LCP:  "+str(self.Att_LCP)+"dB", font=font, fill="white")
     
     
     def display_Confirmacion(self,tipo,variable):
