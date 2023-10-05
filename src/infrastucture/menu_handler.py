@@ -666,6 +666,9 @@ class MenuHandler:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
                         print("RCP modificada:"+str(self.CounterValue_RCP)+"dB")
                         self.queue_m_c.put("rcp="+str(self.CounterValue_RCP))
+                        self.set_RCP(self.CounterValue_RCP)
+                        self.save_variables()
+                        
                         self.menu=0
                         self.display_option()
 
@@ -679,6 +682,8 @@ class MenuHandler:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
                         print("LCP modificada:"+str(self.CounterValue_LCP)+"dB")
                         self.queue_m_c.put("lcp="+str(self.CounterValue_LCP))
+                        self.set_LCP(self.CounterValue_LCP)
+                        self.save_variables()
                         self.menu=0
                         self.display_option()
 
