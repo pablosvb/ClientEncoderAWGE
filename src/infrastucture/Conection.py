@@ -54,6 +54,7 @@ class Conection:
                             print("Conexión cerrada por el servidor.")
                             break
                         if mensaje == "get_status_cm":
+                            print("dentro")
                             self.queue_c_m.put(data.decode())
                         print(f'Server:{data.decode()}')   
 
