@@ -23,6 +23,14 @@ ENCODER_PIN_A = GC.S1  # Ajustar según tu conexión
 ENCODER_PIN_B = GC.S2  # Ajustar según tu conexión
 BUTTON_PIN = GC.S3    # Ajustar según tu conexión
 
+# Lista de pines GPIO a controlar (0-31)
+gpioA1_pins = [GC.A1C16, GC.A1C8, GC.A1C4, GC.A1C2, GC.A1C1]  # Por ejemplo, aquí están los pines GPIO que se utilizarán
+gpioA2_pins = [GC.A2C16, GC.A2C8, GC.A2C4, GC.A2C2, GC.A2C1]  # Por ejemplo, aquí están los pines GPIO que se utilizarán
+# Pin adicional para LA (Latch)
+laA1_pin = GC.A1LE
+laA2_pin = GC.A2LE
+
+
 serial = i2c(port=1, address=0x3C)
 device = sh1106(serial, width=128, height=64, rotate=0)
 device.clear()
@@ -88,8 +96,8 @@ class MenuHandler:
         self.frecuencia = 0 
         self.rf_enable = 0
         self.potencia = 0
-        self.Att_RCP = 0
-        self.Att_LCP = 0
+
+        self.Att_RCP,self.Att_LCP = self.load_variables()
         self.ALC_mode = "Opened" 
         
 
@@ -108,13 +116,32 @@ class MenuHandler:
         GPIO.setup(ENCODER_PIN_B, GPIO.IN)
         GPIO.setup(BUTTON_PIN, GPIO.IN)
 
+        # Configura los pines GPIO como salidas para los Atenuadores.
+        for pin in gpioA1_pins:
+            GPIO.setup(pin, GPIO.OUT)
+
+        GPIO.setup(laA1_pin, GPIO.OUT)
+        for pin in gpioA2_pins:
+            GPIO.setup(pin, GPIO.OUT)
+
+        GPIO.setup(laA2_pin, GPIO.OUT)
+
         GPIO.add_event_detect(ENCODER_PIN_A, GPIO.FALLING, callback=self.handle_encoder,bouncetime=200)
         GPIO.add_event_detect(ENCODER_PIN_B, GPIO.FALLING, callback=self.handle_encoder,bouncetime=200)
         GPIO.add_event_detect(BUTTON_PIN, GPIO.FALLING, callback=self.handle_button, bouncetime=200)
+        
+        
+
+
         self.last_a = GPIO.input(ENCODER_PIN_A)
         self.last_b = GPIO.input(ENCODER_PIN_B)
+
+
         self.A = False
         self.B = False
+
+        self.set_RCP(self.Att_RCP)
+        self.set_LCP(self.Att_LCP)
 
          # Mostrar el menú cuando iniciamos el controlador
         self.image_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/logo.png'
@@ -610,6 +637,92 @@ class MenuHandler:
                         self.menu=0
                         self.display_option()
 
+
+#---------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------    Attenuator   -------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+
+
+    # Función para encender los pines GPIO de acuerdo al número binario
+    def set_RCP(value):
+        num_bits = len(gpioA1_pins)
+        output = "RCP("
+    
+        # Establecer cada bit en los pines GPIO y construir el string de logging
+        for i in range(num_bits):
+            bit = (value >> (num_bits - 1 - i)) & 1  # Invierte el orden del desplazamiento
+            GPIO.output(gpioA1_pins[i], bit)
+            output += str(bit)
+            if i + 1 < num_bits:
+                output += ","
+            else:
+                output += ")"
+        
+        print(output)  # Aquí usamos print, pero podrías usar cualquier logger que prefieras en Python
+        
+        time.sleep(0.1)  # Espera 100 ms
+        GPIO.output(laA1_pin, GPIO.HIGH)
+        time.sleep(0.1)  # Espera 100 ms
+        GPIO.output(laA1_pin, GPIO.LOW)
+        
+        # Poner todos los pines en LOW
+        for pin in gpioA1_pins:
+            GPIO.output(pin, GPIO.LOW)
+        time.sleep(0.1)  # Espera 100 ms
+
+    def set_LCP(value):
+        num_bits = len(gpioA2_pins)
+        output = "LCP("
+        
+        # Establecer cada bit en los pines GPIO y construir el string de logging
+        for i in range(num_bits):
+            bit = (value >> (num_bits - 1 - i)) & 1  # Invierte el orden del desplazamiento
+            GPIO.output(gpioA2_pins[i], bit)
+            output += str(bit)
+            if i + 1 < num_bits:
+                output += ","
+            else:
+                output += ")"
+        
+        print(output)  # Aquí usamos print, pero podrías usar cualquier logger que prefieras en Python
+        
+        time.sleep(0.1)  # Espera 100 ms
+        GPIO.output(laA2_pin, GPIO.HIGH)
+        time.sleep(0.1)  # Espera 100 ms
+        GPIO.output(laA2_pin, GPIO.LOW)
+        
+        # Poner todos los pines en LOW
+        for pin in gpioA2_pins:
+            GPIO.output(pin, GPIO.LOW)
+        time.sleep(0.1)  # Espera 100 ms
+
+#---------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+#-------------------------------------------    Archivo conf   -------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+    def save_variables(self):
+        data = {
+            'RCP': self.Att_RCP,
+            'LCP': self.Att_LCP
+        }
+
+        with open('data.json', 'w') as file:
+            json.dump(data, file)
+
+    def load_variables(self):
+        with open('data.json', 'r') as file:
+            data = json.load(file)
+        return data['RCP'], data['LCP']
+
+#---------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------    RUN   --------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------------#
+        
     def run(self):
         try:
             while not self.terminate_event.is_set():
@@ -623,22 +736,33 @@ class MenuHandler:
                     self.display_Erro()
                 elif valor == "conectado":
                     self.display_option()
+                elif valor == "get_rcp":
+                    self.queue_m_c.put("rcp:"+str(self.Att_RCP))
+                elif valor == "get_lcp":
+                    self.queue_m_c.put("lcp:"+str(self.Att_LCP))
                 elif valor == "nada":
                     pass
                 else:
                     data = json.loads(valor)
 
-                    self.frecuencia = data["rf"] 
-                    self.rf_enable = data["enable"] 
-                    self.potencia = data["power"] 
-                    self.Att_RCP = data["RCP"] 
-                    self.Att_LCP = data["LCP"] 
-                    self.ALC_mode = data["ALC"]  
+                    if data["X"] == "info":
 
-                    print("valor = "+valor)
+                        self.frecuencia = data["rf"] 
+                        self.rf_enable = data["enable"] 
+                        self.potencia = data["power"] 
+                        self.ALC_mode = data["ALC"]  
+                        print("valor = "+valor)
+                        self.select_option_Status()
 
-                    self.select_option_Status()
+                    elif data["x"] == "rcp":
+                        self.Att_RCP = data["rcp"]
+                        self.set_RCP(self.Att_RCP)
+                    
+                    elif data["x"] == "lcp":
+                        self.Att_RCP = data["lcp"]
+                        self.set_LCP(self.Att_LCP)
 
+                                            
 
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
                 pass

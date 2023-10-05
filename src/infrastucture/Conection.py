@@ -1,3 +1,5 @@
+import queue
+import select
 import socket
 import time 
 from src.application import Logger
@@ -36,18 +38,51 @@ class Conection:
                 logger.debug(f'Conectado al servidor: {HOST}:{PORT}')
                 self.queue_c_m.put("conectado")
                 while not self.terminate_event.is_set():
-                    mensaje = self.queue_m_c.get()
-                    print("imprimiendo mensaje:"+ mensaje)
-                    s.sendall(mensaje.encode())
-                    data = s.recv(1024)
-                    if not data:
-                        print("Conexión cerrada por el servidor.")
-                        break
-                    if mensaje == "get_status_cm":
-                        self.queue_c_m.put(data.decode())
-                    print(f'Server:{data.decode()}')
+            # Verifica si hay mensajes para enviar al servidor sin bloquear
+                    try:
+                        mensaje = self.queue_m_c.get(timeout=0.1)  # Intenta obtener un mensaje con un timeout de 0.1 segundos
+                        print("imprimiendo mensaje:"+ mensaje)
+                        s.sendall(mensaje.encode())
+                    except queue.Empty:  # No hay mensajes para enviar
+                        pass
+
+                    # Escucha mensajes del servidor sin bloquear
+                    ready_to_read, _, _ = select.select([s], [], [], 0.1)  # Verifica si hay datos en el socket para leer con un timeout de 0.1 segundos
+                    if ready_to_read:  # Si hay datos para leer
+                        data = s.recv(1024)
+                        if not data:
+                            print("Conexión cerrada por el servidor.")
+                            break
+                        if mensaje == "get_status_cm":
+                            self.queue_c_m.put(data.decode())
+                        print(f'Server:{data.decode()}')   
+
+                        datos = data.decode()
+                        datos_lower = datos.lower()
+                        Comand = datos_lower.replace("=","")
+                        list_Comand = Comand.split()
+
+                        if len(list_Comand)<2:
+                            list_Comand.append("p")
+
+                        elif list_Comand[0] == "set_att_rcp":
+                            num = int(list_Comand[1])
+                            jsonString = '{"X":"rcp","rcp":'+str(num)+'}'
+                            self.queue_c_m.put(jsonString)
+
+                        elif list_Comand[0] == "set_att_lcp":
+                            num = int(list_Comand[1])
+                            jsonString = '{"X":"rcp","rcp":'+str(num)+'}'
+                            self.queue_c_m.put(jsonString)
+                        elif list_Comand[0] == "get_rcp":
+                            self.queue_c_m.put("get_rcp")
+                        elif list_Comand[0] == "get_lcp":
+                            self.queue_c_m.put("get_lcp") 
+                            
+                    
 
             except socket.gaierror as e:
+
                 error = True
                 if e.errno == 11001:
                     logger.debug('ERROR 11001: Los Datos de HOST Y PUERTO introducidos no son correctos')
