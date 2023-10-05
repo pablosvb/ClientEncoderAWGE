@@ -1,4 +1,5 @@
 
+import os
 import queue
 import time
 from luma.core.interface.serial import i2c
@@ -767,6 +768,17 @@ class MenuHandler:
             print(f"Error al guardar variables: {e}")
 
     def load_variables(self):
+        filename = '/home/awge/ClientEncoderAWGE/src/infrastucture/data.json'
+
+        if not os.path.exists(filename):
+            initial_data = {
+                'RCP': 0, 
+                'LCP': 0
+            }
+            with open(filename, 'w') as file:
+                json.dump(initial_data, file)
+            print(f"File {filename} created with initial data.")
+        
         try:
             with open('/home/awge/ClientEncoderAWGE/src/infrastucture/data.json', 'r') as file:
                 data = json.load(file)
