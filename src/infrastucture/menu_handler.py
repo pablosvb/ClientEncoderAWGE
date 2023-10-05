@@ -770,7 +770,7 @@ class MenuHandler:
                 else:
                     data = json.loads(valor)
 
-                    if data["X"] == "info":
+                    if data["x"] == "info":
 
                         self.frecuencia = data["rf"]
                         self.rf_enable = data["enable"] 
