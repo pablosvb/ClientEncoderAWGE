@@ -713,7 +713,7 @@ class MenuHandler:
             json.dump(data, file)
 
     def load_variables(self):
-        with open('data.json', 'r') as file:
+        with open('/home/awge/ClientEncoderAWGE/src/infrastucture/data.json', 'r') as file:
             data = json.load(file)
         return data['RCP'], data['LCP']
 
