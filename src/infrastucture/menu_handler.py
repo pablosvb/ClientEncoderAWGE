@@ -742,7 +742,7 @@ class MenuHandler:
             'LCP': self.Att_LCP
         }
 
-        with open('data.json', 'w') as file:
+        with open('/home/awge/ClientEncoderAWGE/src/infrastucture/data.json', 'w') as file:
             json.dump(data, file)
 
     def load_variables(self):
