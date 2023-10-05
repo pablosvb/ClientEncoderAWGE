@@ -61,10 +61,11 @@ class Conection:
                         datos_lower = datos.lower()
                         Comand = datos_lower.replace("=","")
                         list_Comand = Comand.split()
-
+                        
+                        print(f'Dato:{list_Comand[0]}') 
                         if len(list_Comand)<2:
                             list_Comand.append("p")
-
+                        
                         elif list_Comand[0] == "set_rcp":
                             num = int(list_Comand[1])
                             jsonString = '{"X":"rcp","rcp":'+str(num)+'}'
