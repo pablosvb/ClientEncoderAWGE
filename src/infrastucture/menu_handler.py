@@ -232,14 +232,14 @@ class MenuHandler:
                 draw.rectangle([(0, 0), (127, 25)], outline="white")
                 draw.text((10,0), "Frec. Sintetizador:  ", font=font_status, fill="white")
                 draw.text((17,10),value+" Hz",font=font_status, fill="white")
-                draw.text((0,26), "Main lock:"+self.MAIN, font=font_status, fill="white")
-                draw.text((70,26), self.MAIN, font=font_status, fill="white")
+                draw.text((0,26), "Main lock:", font=font_status, fill="white")
+                draw.text((75,26), self.MAIN, font=font_status, fill="white")
                 #draw.line([(0, 38), (128, 38)], fill="white")
                 draw.text((0,38),"ext_ref_lock:",font=font_status, fill="white")
-                draw.text((70,38),self.ext_ref_lock,font=font_status, fill="white")
+                draw.text((75,38),self.ext_ref_lock,font=font_status, fill="white")
                 #draw.line([(0, 50), (128, 50)], fill="white")
                 draw.text((0,50), "ext_ref_det:", font=font_status, fill="white")
-                draw.text((0,50), self.ext_ref_detect, font=font_status, fill="white")
+                draw.text((75,50), self.ext_ref_detect, font=font_status, fill="white")
         elif self.Menu_option_Status == 1:
             with canvas(self.device) as draw: 
                 draw.text((0, 0), "Alarmas lock", font=font_status, fill="white")
@@ -376,7 +376,7 @@ class MenuHandler:
         print("Menu_option_confirmacion: "+ str(self.Menu_option_ALC))
         self.select_option_ALC()
 
-    def next_option_Status(self): 
+    def next_option_Status(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
         self.Menu_option_Status += 1
         if self.Menu_option_Status > 2 :
             self.Menu_option_Status = 0
@@ -389,7 +389,7 @@ class MenuHandler:
             self.Menu_option_Status = 2
         print("Menu_option_Status: "+ str(self.Menu_option_Status))
         self.select_option_Status()
-
+        
     def next_option_Confirmacion(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
         self.Menu_option_confirmacion += 1
         if self.Menu_option_confirmacion > 1 :
