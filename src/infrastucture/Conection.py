@@ -59,8 +59,8 @@ class Conection:
 
                         datos = data.decode()
                         datos_lower = datos.lower()
-                        Comand = datos_lower.replace("=","")
-                        list_Comand = Comand.split()
+                        Comand = datos_lower.replace(" ","")
+                        list_Comand = Comand.split("=")
                         
                         print(f'Dato:{list_Comand[0]}') 
                         if len(list_Comand)<2:
