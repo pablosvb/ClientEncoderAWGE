@@ -65,12 +65,12 @@ class Conection:
                         if len(list_Comand)<2:
                             list_Comand.append("p")
 
-                        elif list_Comand[0] == "set_att_rcp":
+                        elif list_Comand[0] == "set_rcp":
                             num = int(list_Comand[1])
                             jsonString = '{"X":"rcp","rcp":'+str(num)+'}'
                             self.queue_c_m.put(jsonString)
 
-                        elif list_Comand[0] == "set_att_lcp":
+                        elif list_Comand[0] == "set__lcp":
                             num = int(list_Comand[1])
                             jsonString = '{"X":"rcp","rcp":'+str(num)+'}'
                             self.queue_c_m.put(jsonString)
