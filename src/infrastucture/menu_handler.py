@@ -700,7 +700,7 @@ class MenuHandler:
     # Función para encender los pines GPIO de acuerdo al número binario
     def set_RCP(self,value):
         num_bits = len(gpioA1_pins)
-        output = "RCP("
+        output = str(value)+"RCP("
     
         # Establecer cada bit en los pines GPIO y construir el string de logging
         for i in range(num_bits):
@@ -726,7 +726,7 @@ class MenuHandler:
 
     def set_LCP(self,value):
         num_bits = len(gpioA2_pins)
-        output = "LCP("
+        output = str(value)+"LCP("
         
         # Establecer cada bit en los pines GPIO y construir el string de logging
         for i in range(num_bits):
