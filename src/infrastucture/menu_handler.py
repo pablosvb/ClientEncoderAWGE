@@ -598,7 +598,7 @@ class MenuHandler:
                 if self.Menu_option_ALC == 0 :
                     # la opcion seleccionada es CLOSED.
                     print("ALC modificado a closed")
-                    self.queue_m_c.put("set_alc_mode=closed")
+                    self.queue_m_c.put("alc_mode=closed")
                     ## enviamos la canfiguracion al servidor
                     self.menu=0
                     self.display_option()
@@ -640,7 +640,7 @@ class MenuHandler:
                     else:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
                         print("RCP modificada:"+str(self.CounterValue_RCP)+"dB")
-                        self.queue_m_c.put("set_att_rcp="+str(self.CounterValue_RCP))
+                        self.queue_m_c.put("rcp="+str(self.CounterValue_RCP))
                         self.menu=0
                         self.display_option()
 
@@ -653,7 +653,7 @@ class MenuHandler:
                     else:
                         # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
                         print("LCP modificada:"+str(self.CounterValue_LCP)+"dB")
-                        self.queue_m_c.put("set_att_lcp="+str(self.CounterValue_LCP))
+                        self.queue_m_c.put("lcp="+str(self.CounterValue_LCP))
                         self.menu=0
                         self.display_option()
 
