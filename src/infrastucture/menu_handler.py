@@ -245,7 +245,7 @@ class MenuHandler:
                 draw.text((0, 20), "VCXO:   "+self.ref_VCXO_pll, font=font_status, fill="white")
                 draw.text((0, 30), "Coarse: "+self.ref_Coarse, font=font_status, fill="white")
                 draw.text((0, 40), "fine:   "+self.fine_pll_ld, font=font_status, fill="white")
-                draw.text((0,26), "Main:    "+self.MAIN, font=font_status, fill="white")
+                draw.text((0,50), "Main:    "+self.MAIN, font=font_status, fill="white")
         elif self.Menu_option_Status == 2:
             with canvas(self.device) as draw: 
                 draw.text((0, 0), "Att_RCP:  "+str(self.Att_RCP)+" dB", font=font_status, fill="white")
