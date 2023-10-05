@@ -12,3 +12,4 @@ pyvenv.cfg
 .cache/
 .pytest_cache/
 *.pyc
+.json
