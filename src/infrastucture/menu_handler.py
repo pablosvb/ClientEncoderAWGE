@@ -823,10 +823,15 @@ class MenuHandler:
                     elif data["x"] == "rcp":
                         self.Att_RCP = data["rcp"]
                         self.set_RCP(self.Att_RCP)
+                        
+                        self.save_variables()
                     
                     elif data["x"] == "lcp":
                         self.Att_RCP = data["lcp"]
                         self.set_LCP(self.Att_LCP)
+
+                        self.save_variables()
+
 
                                             
 
