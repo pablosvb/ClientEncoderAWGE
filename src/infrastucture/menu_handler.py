@@ -224,7 +224,7 @@ class MenuHandler:
                     draw.text((x_position, 50), "▲" , font=font, fill="white")
                 else:
                     draw.text((x_position, 50), " " , font=font, fill="white")
-                    
+
     def display_option_Status(self):
         value = self.format_with_spaces(self.frecuencia)
         if self.Menu_option_Status == 0:
@@ -728,14 +728,19 @@ class MenuHandler:
             'RCP': self.Att_RCP,
             'LCP': self.Att_LCP
         }
-
-        with open('/home/awge/ClientEncoderAWGE/src/infrastucture/data.json', 'w') as file:
-            json.dump(data, file)
+        try:
+            with open('/home/awge/ClientEncoderAWGE/src/infrastucture/data.json', 'w') as file:
+                json.dump(data, file)
+        except Exception as e:
+            print(f"Error al guardar variables: {e}")
 
     def load_variables(self):
-        with open('/home/awge/ClientEncoderAWGE/src/infrastucture/data.json', 'r') as file:
-            data = json.load(file)
-        return data['RCP'], data['LCP']
+        try:
+            with open('/home/awge/ClientEncoderAWGE/src/infrastucture/data.json', 'r') as file:
+                data = json.load(file)
+            return data['RCP'], data['LCP']
+        except Exception as e:
+            print(f"Error al cargar variables: {e}")
 
 #---------------------------------------------------------------------------------------------------------------#
 #---------------------------------------------------------------------------------------------------------------#
