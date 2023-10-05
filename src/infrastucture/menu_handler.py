@@ -224,20 +224,7 @@ class MenuHandler:
                     draw.text((x_position, 50), "▲" , font=font, fill="white")
                 else:
                     draw.text((x_position, 50), " " , font=font, fill="white")
-     self.frecuencia = 0 #rf
-        self.rf_enable = 0  #enable
-        self.potencia = 0   #power
-        self.Att_RCP = 0 
-        self.Att_LCP = 0
-        self.ALC = "opened"
-        self.MAIN = "locked"
-        self.ref_out_select = "100 Mhz"
-        self.ext_ref_detect = "enable"
-        self.ext_ref_lock = "enable"
-        self.ref_TCXO_pll = "locked"
-        self.ref_VCXO_pll = "locked"
-        self.ref_Coarse = "locked"
-        self.fine_pll_ld = "locked"
+                    
     def display_option_Status(self):
         value = self.format_with_spaces(self.frecuencia)
         if self.Menu_option_Status == 0:
