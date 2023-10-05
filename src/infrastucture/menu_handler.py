@@ -224,7 +224,20 @@ class MenuHandler:
                     draw.text((x_position, 50), "▲" , font=font, fill="white")
                 else:
                     draw.text((x_position, 50), " " , font=font, fill="white")
-    
+     self.frecuencia = 0 #rf
+        self.rf_enable = 0  #enable
+        self.potencia = 0   #power
+        self.Att_RCP = 0 
+        self.Att_LCP = 0
+        self.ALC = "opened"
+        self.MAIN = "locked"
+        self.ref_out_select = "100 Mhz"
+        self.ext_ref_detect = "enable"
+        self.ext_ref_lock = "enable"
+        self.ref_TCXO_pll = "locked"
+        self.ref_VCXO_pll = "locked"
+        self.ref_Coarse = "locked"
+        self.fine_pll_ld = "locked"
     def display_option_Status(self):
         value = self.format_with_spaces(self.frecuencia)
         if self.Menu_option_Status == 0:
@@ -232,17 +245,26 @@ class MenuHandler:
                 draw.rectangle([(0, 0), (127, 25)], outline="white")
                 draw.text((10,0), "Frec. Sintetizador:  ", font=font_status, fill="white")
                 draw.text((17,10),value+" Hz",font=font_status, fill="white")
-                draw.text((0,26), "RF_Enable: "+str(bool(self.rf_enable)), font=font_status, fill="white")
+                draw.text((0,26), "Main lock: "+self.MAIN, font=font_status, fill="white")
                 #draw.line([(0, 38), (128, 38)], fill="white")
-                draw.text((0,38),"Power: "+str(self.potencia)+" dBm",font=font_status, fill="white")
+                draw.text((0,38),"ext_ref_lock: "+self.ext_ref_lock,font=font_status, fill="white")
                 #draw.line([(0, 50), (128, 50)], fill="white")
-                draw.text((0,50), "Ref:"+self.ALC_mode, font=font_status, fill="white")
+                draw.text((0,50), "ext_ref_detect: "+self.ext_ref_detect, font=font_status, fill="white")
         elif self.Menu_option_Status == 1:
+            with canvas(self.device) as draw: 
+                draw.text((0, 0), "Alarmas lock", font=font_status, fill="white")
+                draw.line([(0, 10), (128, 10)], fill="white")
+                draw.text((0, 10), "ref_TCXO_pll:  "+self.ref_TCXO_pll, font=font_status, fill="white")
+                draw.text((0, 20), "ref_VCXO_pll:  "+self.ref_VCXO_pll, font=font_status, fill="white")
+                draw.text((0, 30), "ref_Coarse:    "+self.ref_Coarse, font=font_status, fill="white")
+                draw.text((0, 40), "fine_pll_ld:   "+self.fine_pll_ld, font=font_status, fill="white")
+        elif self.Menu_option_Status == 2:
             with canvas(self.device) as draw: 
                 draw.text((0, 0), "Att_RCP:  "+str(self.Att_RCP)+" dB", font=font_status, fill="white")
                 draw.line([(0, 15), (128, 15)], fill="white")
                 draw.text((0, 15), "Att_LCP:  "+str(self.Att_LCP)+" dB", font=font_status, fill="white")
-    
+
+                
     
     def display_Confirmacion(self,tipo,variable):
         with canvas(self.device) as draw: 
