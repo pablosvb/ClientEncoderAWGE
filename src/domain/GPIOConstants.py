@@ -36,21 +36,21 @@ S3 = 18 # button encoder.
 
 
 #Atenuador 1:
-A1LE = 13 
-A1C1 = 19
-A1C16 = 16
-A1C4 = 26
-A1C8 = 20
-A1C2 = 21
+A1LE = 10 
+A1C1 = 9
+A1C16 = 25
+A1C4 = 11
+A1C8 = 8
+A1C2 = 7
 
 #Atenuador 2 :
 
-A2LE = 10 -19
-A2C1 = 9
-A2C16 = 25
-A2C4 = 11
-A2C8 = 8
-A2C2 = 7
+A2LE = 13          
+A2C1 = 19          
+A2C16 = 16
+A2C4 = 26
+A2C8 = 20
+A2C2 = 21
 
 #PinOut LCD-I2C:
 
