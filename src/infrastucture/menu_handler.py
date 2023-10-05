@@ -96,6 +96,8 @@ class MenuHandler:
         self.frecuencia = 0 
         self.rf_enable = 0
         self.potencia = 0
+        self.Att_RCP = 0 
+        self.Att_LCP = 0
 
         self.Att_RCP,self.Att_LCP = self.load_variables()
         self.ALC_mode = "Opened" 
@@ -646,7 +648,7 @@ class MenuHandler:
 
 
     # Función para encender los pines GPIO de acuerdo al número binario
-    def set_RCP(value):
+    def set_RCP(self,value):
         num_bits = len(gpioA1_pins)
         output = "RCP("
     
@@ -672,7 +674,7 @@ class MenuHandler:
             GPIO.output(pin, GPIO.LOW)
         time.sleep(0.1)  # Espera 100 ms
 
-    def set_LCP(value):
+    def set_LCP(self,value):
         num_bits = len(gpioA2_pins)
         output = "LCP("
         
