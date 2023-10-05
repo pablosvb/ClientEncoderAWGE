@@ -93,14 +93,23 @@ class MenuHandler:
         # Variables menu Status
         self.Menu_option_Status = 0
 
-        self.frecuencia = 0 
-        self.rf_enable = 0
-        self.potencia = 0
+        self.frecuencia = 0 #rf
+        self.rf_enable = 0  #enable
+        self.potencia = 0   #power
         self.Att_RCP = 0 
         self.Att_LCP = 0
+        self.ALC = "opened"
+        self.MAIN = "locked"
+        self.ref_out_select = "100 Mhz"
+        self.ext_ref_detect = "enable"
+        self.ref_TCXO_pll = "locked"
+        self.ref_VCXO_pll = "locked"
+        self.ext_ref_lock = "enable"
+        self.ref_Coarse = "locked"
+        self.fine_pll_ld = "locked"
 
         self.Att_RCP,self.Att_LCP = self.load_variables()
-        self.ALC_mode = "Opened" 
+       
         
 
         # Variables menu confirmacion:
@@ -749,10 +758,19 @@ class MenuHandler:
 
                     if data["X"] == "info":
 
-                        self.frecuencia = data["rf"] 
+                        self.frecuencia = data["rf"]
                         self.rf_enable = data["enable"] 
                         self.potencia = data["power"] 
-                        self.ALC_mode = data["ALC"]  
+                        self.ALC = data["ALC"] 
+                        self.MAIN = data["MAIN"]
+                        self.ref_out_select = data["ref_out_select"]
+                        self.ext_ref_detect = data["ext_ref_detect"]
+                        self.ref_TCXO_pll = data["ref_TCXO_pll"]
+                        self.ref_VCXO_pll = data["ref_VCXO_pll"]
+                        self.ext_ref_lock = data["ext_ref_lock"]
+                        self.ref_Coarse = data["ref_Coarse"]
+                        self.fine_pll_ld = data["fine_pll_ld"]
+
                         print("valor = "+valor)
                         self.select_option_Status()
 
