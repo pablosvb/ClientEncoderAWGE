@@ -872,12 +872,15 @@ class MenuHandler:
 
                         if self.selected == "Frecuencia":
                             self.menu=1
+                            self.CounterValue_Option_fr = self.frecuencia
                             self.select_option_Fr()
                         elif self.selected == "Att_RCP":
                             self.menu=2
+                            self.CounterValue_RCP = self.Att_RCP
                             self.select_option_RCP()
                         elif self.selected == "Att_LCP":
                             self.menu=3
+                            self.CounterValue_LCP = self.Att_LCP
                             self.select_option_LCP()
                         elif self.selected == "Ref_Clock":
                             self.menu=4
