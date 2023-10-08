@@ -179,7 +179,7 @@ class MenuHandler:
 
          # Mostrar el menú cuando iniciamos el controlador
          
-        self.image_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/logo.png'
+        self.image_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/logo2.png'
         self.image_emergencia_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/emergencia2.png'
 
         self.img_emergencia = Image.open(self.image_emergencia_path)
@@ -223,6 +223,9 @@ class MenuHandler:
         # Es posible que desees redimensionar o adaptar la imagen al tamaño específico de tu OLED
             img = img.resize(device.size, Image.LANCZOS)
             img = img.convert("1")
+
+            img = ImageOps.invert(img)
+
             device.display(img)
 
     def display_option(self):
