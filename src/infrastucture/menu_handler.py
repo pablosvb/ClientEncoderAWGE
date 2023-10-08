@@ -180,7 +180,7 @@ class MenuHandler:
          # Mostrar el menú cuando iniciamos el controlador
          
         self.image_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/logo.png'
-        self.image_emergencia_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/emergencia.png'
+        self.image_emergencia_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/emergencia2.png'
 
         self.img_emergencia = Image.open(self.image_emergencia_path)
         #self.img_emergencia = self.img_emergencia.resize(device.size, Image.LANCZOS)
