@@ -194,7 +194,7 @@ class MenuHandler:
         self.display_Emergencia("MAIN")
         # tiempo para el encendido y todas las conexiones 
         time.sleep(10)
-        self.display_option()
+        #self.display_option()
 
 
     def display_Solv(self):
