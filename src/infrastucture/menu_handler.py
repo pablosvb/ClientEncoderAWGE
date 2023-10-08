@@ -188,7 +188,7 @@ class MenuHandler:
 
 
 
-        self.display_Erro()
+        self.display_Emergencia()
         # tiempo para el encendido y todas las conexiones 
         time.sleep(4)
         self.display_option()
