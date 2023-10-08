@@ -183,7 +183,7 @@ class MenuHandler:
         self.image_emergencia_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/emergencia2.png'
 
         self.img_emergencia = Image.open(self.image_emergencia_path)
-        #self.img_emergencia = self.img_emergencia.resize(device.size, Image.LANCZOS)
+        self.img_emergencia = self.img_emergencia.resize((40,40), Image.LANCZOS)
         self.img_emergencia = self.img_emergencia.convert("1")
 
         # Invierte los colores de la imagen
