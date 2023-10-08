@@ -920,6 +920,8 @@ class MenuHandler:
                             self.display_option_Error("RF1_OUT_ENABLE")
                         elif self.error == 5:
                             self.display_option_Error("RF1_STANDBY")
+                        elif self.error == 0:
+                            self.self.display_option()
 
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
                 pass
