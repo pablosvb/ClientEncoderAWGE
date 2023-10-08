@@ -211,6 +211,7 @@ class MenuHandler:
         
         with canvas(self.device) as draw: 
             # Calcula el tamaño del texto
+            print(type(font))
             textwidth,textheight = font.getsize(error)
             # Calcula las coordenadas x,centrar el texto
             x = (device.width - textwidth) // 2
