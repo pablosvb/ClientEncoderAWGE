@@ -208,11 +208,13 @@ class MenuHandler:
             draw.text((0,35),"Conexion servidor", font=font, fill="white")
 
     def display_Emergencia(self,error):
-        # Calcula el tamaño del texto
-        textwidth, textheight = draw.textsize(error, font)
-        # Calcula las coordenadas x,centrar el texto
-        x = (device.width - textwidth) // 2
+        
         with canvas(self.device) as draw: 
+            # Calcula el tamaño del texto
+            textwidth = draw.textsize(error, font)
+            # Calcula las coordenadas x,centrar el texto
+            x = (device.width - textwidth) // 2
+            
             draw.text((40, 0), "ERROR", font=font, fill="white")
             draw.bitmap((40.20,10),self.img_emergencia,fill="white")
             draw.text((x,50),error, font=font, fill="white")
