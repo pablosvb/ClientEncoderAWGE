@@ -16,8 +16,13 @@ font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Ruta a una
 font_size = 11
 font_size_status = 10
 
+
+
 font = ImageFont.truetype(font_path, font_size)
 font_status = ImageFont.truetype(font_path, font_size_status)
+
+emergencia_size = (45, 45)
+
 # Configura los pines GPIO como Entradas para el Encoder.
 
 ENCODER_PIN_A = GC.S1  # Ajustar según tu conexión
@@ -73,6 +78,9 @@ class MenuHandler:
         # variables menu principal
         self.menu = 0
         self.Menu0_option = 0
+        self.selected = ""
+
+
         # Variables menu frecuencia 
         self.Menu_Option_fr = 0
         self.fr_mult = 1
@@ -94,21 +102,35 @@ class MenuHandler:
         # Variables menu Status
         self.Menu_option_Status = 0
 
+
+
         self.frecuencia = 0 #rf
         self.rf_enable = 0  #enable
         self.potencia = 0   #power
         self.Att_RCP = 0 
         self.Att_LCP = 0
+        
         self.ALC = "opened"
-        self.MAIN = "locked"
+        
+        
         self.ref_out_select = "100 Mhz"
+        
         self.ext_ref_detect = "enable"
         self.ref_TCXO_pll = "locked"
         self.ref_VCXO_pll = "locked"
-        self.ext_ref_lock = "enable"
+        self.ext_ref_lock_enable = "enable"
         self.ref_Coarse = "locked"
         self.fine_pll_ld = "locked"
+       
+        self.error = 0
 
+        self.MAIN = "locked"
+        self.rf_enable = "locked"
+        self.rf1_standby = "locked"
+        self.ext_ref_lock_enable = "locked"
+        self.crs_ref_pll_ld = "locked"
+        self.over_temp = "locked"
+    
         self.Att_RCP,self.Att_LCP = self.load_variables()
        
         
@@ -156,9 +178,17 @@ class MenuHandler:
         self.set_LCP(self.Att_LCP)
 
          # Mostrar el menú cuando iniciamos el controlador
+         
         self.image_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/logo.png'
-       
-        self.display_Logo()
+        self.image_emergencia_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/emergencia.png'
+
+        self.img_emergencia = Image.open(self.image_emergencia_path)
+        self.img_emergencia = self.img_emergencia.resize(emergencia_size.size, Image.LANCZOS)
+        self.img_emergencia = self.img_emergencia.convert("1")
+
+
+
+        self.display_Erro()
         # tiempo para el encendido y todas las conexiones 
         time.sleep(4)
         self.display_option()
@@ -173,6 +203,12 @@ class MenuHandler:
         with canvas(self.device) as draw: 
             draw.text((40, 20), "ERROR", font=font, fill="white")
             draw.text((0,35),"Conexion servidor", font=font, fill="white")
+
+    def display_Emergencia(self,error):
+        with canvas(self.device) as draw: 
+            draw.text((40, 0), "ERROR", font=font, fill="white")
+            draw.bitmap((0.20),self.img_emergencia,fill="white")
+            draw.text((30,50),error, font=font, fill="white")
     
     def display_Logo(self):
         with Image.open(self.image_path) as img:
@@ -401,25 +437,10 @@ class MenuHandler:
     
     def select_option(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
-        selected = self.options_menu[self.Menu0_option]
-        # En lugar de imprimir en consola, muestra en la OLED:
-        if selected == "Frecuencia":
-            self.menu=1
-            self.select_option_Fr()
-        elif selected == "Att_RCP":
-            self.menu=2
-            self.select_option_RCP()
-        elif selected == "Att_LCP":
-            self.menu=3
-            self.select_option_LCP()
-        elif selected == "ALC_Mode":
-            self.menu=4
-            self.select_option_ALC()
-        elif selected == "Status":
-            print("dentro")
-            self.queue_m_c.put("get_status_cm")
+        self.selected = self.options_menu[self.Menu0_option] 
+        self.queue_m_c.put("get_status_cm") # se pide informacion al servidor para completar informacion.
+        # la informacion se recive en la funcion run.
             
-            self.menu=5
             
 
     def select_option_Fr(self):
@@ -830,7 +851,23 @@ class MenuHandler:
                         self.fine_pll_ld = data["fine_pll_ld"]
 
                         print("valor = "+valor)
-                        self.select_option_Status()
+
+                        if self.selected == "Frecuencia":
+                            self.menu=1
+                            self.select_option_Fr()
+                        elif self.selected == "Att_RCP":
+                            self.menu=2
+                            self.select_option_RCP()
+                        elif self.selected == "Att_LCP":
+                            self.menu=3
+                            self.select_option_LCP()
+                        elif self.selected == "Ref_Clock":
+                            self.menu=4
+                            self.select_option_Ref_Clock()
+                        elif self.selected == "Status":
+                            self.select_option_Status()
+                            self.menu=5
+                        
 
                     elif data["x"] == "rcp":
                         self.Att_RCP = data["rcp"]
@@ -843,9 +880,26 @@ class MenuHandler:
                         self.set_LCP(self.Att_LCP)
 
                         self.save_variables()
+                    elif data["x"] == "error":
 
+                        self.error = data["error"]
+                        self.rf_enable = data["rf1_out_enable"] 
+                        self.rf1_standby = data["rf1_standby"]
+                        self.MAIN = data["main"]
+                        self.ext_ref_lock_enable = data["ext_ref_lock_enable"]
+                        self.crs_ref_pll_ld = data["crs_ref_pll_ld"]
+                        self.over_temp = data["over_temp"]
 
-                                            
+                        if self.error == 1:
+                            self.display_option_Error("MAIN")
+                        elif self.error == 2:
+                            self.display_option_Error("CRS_REF")
+                        elif self.error == 3:
+                            self.display_option_Error("OVER_TEMP")
+                        elif self.error == 4:
+                            self.display_option_Error("RF1_OUT_ENABLE")
+                        elif self.error == 5:
+                            self.display_option_Error("RF1_STANDBY")
 
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
                 pass
