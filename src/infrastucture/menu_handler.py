@@ -183,7 +183,7 @@ class MenuHandler:
         self.image_emergencia_path = '/home/awge/ClientEncoderAWGE/src/infrastucture/emergencia.png'
 
         self.img_emergencia = Image.open(self.image_emergencia_path)
-        self.img_emergencia = self.img_emergencia.resize(device.size, Image.LANCZOS)
+        #self.img_emergencia = self.img_emergencia.resize(device.size, Image.LANCZOS)
         self.img_emergencia = self.img_emergencia.convert("1")
 
 
