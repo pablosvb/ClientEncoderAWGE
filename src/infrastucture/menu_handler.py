@@ -191,21 +191,16 @@ class MenuHandler:
 
 
 
-        self.display_Emergencia("MAIN")
+        self.display_Logo
         # tiempo para el encendido y todas las conexiones 
-        time.sleep(10)
-        #self.display_option()
+        time.sleep(3)
+        self.display_option()
 
 
     def display_Solv(self):
         with canvas(self.device) as draw: 
             draw.text((10, 20), "Inicializando", font=font, fill="white")
             draw.text((0,40),"Servidor conectado", font=font, fill="white")    
-
-    def display_Erro(self):
-        with canvas(self.device) as draw: 
-            draw.text((40, 20), "ERROR", font=font, fill="white")
-            draw.text((0,35),"Conexion servidor", font=font, fill="white")
 
     def display_Emergencia(self,error):
         
@@ -836,7 +831,7 @@ class MenuHandler:
                     valor = "nada"
                 
                 if valor == "error" :
-                    self.display_Erro()
+                    self.display_Emergencia("Conexion servidor")
                 elif valor == "conectado":
                     self.display_option()
                 elif valor == "get_rcp":
