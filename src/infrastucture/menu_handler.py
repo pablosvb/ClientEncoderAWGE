@@ -508,7 +508,7 @@ class MenuHandler:
                 elif self.menu == 3:
                     self.next_option_LCP()
                 elif self.menu == 4:
-                    self.next_option_ALC()
+                    self.next_option_Ref_Clock()
                 elif self.menu == 5:
                     self.next_option_Status()
                 elif self.menu == 10:
@@ -528,7 +528,7 @@ class MenuHandler:
                 elif self.menu == 3:
                     self.previous_option_LCP()
                 elif self.menu == 4:
-                    self.next_option_ALC()
+                    self.next_option_Ref_Clock()
                 elif self.menu == 5:
                     self.next_option_Status()
                 elif self.menu == 10:
