@@ -268,7 +268,7 @@ class MenuHandler:
             draw.text((10,40),"External   Internal",font=font, fill="white")
             for i, option in enumerate(self.options_Ref_Clock):
                 x_position = 85 - i * 55
-                if i == self.Menu_option_ALC:
+                if i == self.Menu_option_Ref_Clock:
                     draw.text((x_position, 50), "▲" , font=font, fill="white")
                 else:
                     draw.text((x_position, 50), " " , font=font, fill="white")
@@ -889,7 +889,6 @@ class MenuHandler:
                     elif data["x"] == "lcp":
                         self.Att_RCP = data["lcp"]
                         self.set_LCP(self.Att_LCP)
-
                         self.save_variables()
                     elif data["x"] == "error":
 
