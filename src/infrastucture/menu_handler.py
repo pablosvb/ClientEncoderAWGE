@@ -5,7 +5,7 @@ import time
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import sh1106
-from PIL import ImageFont, ImageDraw, Image
+from PIL import ImageFont, ImageDraw, Image , ImageOps
 import RPi.GPIO as GPIO
 import src.domain.GPIOConstants as GC
 from queue import Queue
@@ -185,6 +185,9 @@ class MenuHandler:
         self.img_emergencia = Image.open(self.image_emergencia_path)
         #self.img_emergencia = self.img_emergencia.resize(device.size, Image.LANCZOS)
         self.img_emergencia = self.img_emergencia.convert("1")
+
+        # Invierte los colores de la imagen
+        self.img_emergencia = ImageOps.invert(self.img_emergencia)
 
 
 
