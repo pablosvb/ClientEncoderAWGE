@@ -203,17 +203,16 @@ class MenuHandler:
             draw.text((0,40),"Servidor conectado", font=font, fill="white")    
 
     def display_Emergencia(self,error):
-        
-        with canvas(self.device) as draw: 
-            # Calcula el tamaño de los textos y de la imagen:
-            textwidth_error = font.getlength(error)
-            textwidth_title = font.getlength("ERROR")
-            imagenwidth = self.img_emergencia.width
-            # Calcula las coordenadas x,centrar el texto
-            x_error = (device.width - textwidth_error) // 2
-            x_title = (device.width - textwidth_title) // 2
-            x_imagen = (device.width - imagenwidth)//2
+        # Calcula el tamaño de los textos y de la imagen:
+        textwidth_error = font.getlength(error)
+        textwidth_title = font.getlength("ERROR")
+        imagenwidth = self.img_emergencia.width
+        # Calcula las coordenadas x,centrar el texto
+        x_error = (device.width - textwidth_error) // 2
+        x_title = (device.width - textwidth_title) // 2
+        x_imagen = (device.width - imagenwidth)//2
 
+        with canvas(self.device) as draw: 
             draw.text((x_title, 0), "ERROR", font=font, fill="white")
             draw.bitmap((x_imagen,10),self.img_emergencia,fill="white")
             draw.text((x_error,50),error, font=font, fill="white")
@@ -263,8 +262,13 @@ class MenuHandler:
     
     
     def display_option_Ref_Clock(self):
+        # Calcula el tamaño de los textos y de la imagen:
+        textwidth_title = font.getlength("Modo Ref_Clock:")
+        
+        # Calcula las coordenadas x,centrar el texto
+        x_title = (device.width - textwidth_title) // 2
         with canvas(self.device) as draw: 
-            draw.text((30, 0), "Modo Ref_Clock:  ", font=font, fill="white")
+            draw.text((x_title, 0), "Modo Ref_Clock:", font=font, fill="white")
             draw.text((10,40),"External   Internal",font=font, fill="white")
             for i, option in enumerate(self.options_Ref_Clock):
                 x_position = 85 - i * 55
