@@ -211,7 +211,7 @@ class MenuHandler:
         with canvas(self.device) as draw: 
             draw.text((40, 0), "ERROR", font=font, fill="white")
             draw.bitmap((40.20,10),self.img_emergencia,fill="white")
-            draw.text((30,50),error, font=font, fill="white")
+            draw.text((5,50),error, font=font, fill="white")
     
     def display_Logo(self):
         with Image.open(self.image_path) as img:
