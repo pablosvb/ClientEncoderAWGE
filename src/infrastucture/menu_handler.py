@@ -68,7 +68,7 @@ class MenuHandler:
         self.queue_m_c = queue_m_c
         self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "Ref_Clock", "Status"]
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
-        self.options_ALC = ["", "Internal"]
+        self.options_Ref_Clock = ["External", "Internal"]
         self.options_confirmacion =["SI","NO"]
         # variables menu principal
         self.menu = 0
@@ -88,8 +88,8 @@ class MenuHandler:
         self.CounterValue_LCP = 0
 
         # Variables menu ALC
-        self.Menu_option_ALC = 0
-        self.CounterValue_ALC = 0
+        self.Menu_option_Ref_Clock = 0
+        self.CounterValue_Ref_Clock = 0
 
         # Variables menu Status
         self.Menu_option_Status = 0
@@ -215,11 +215,11 @@ class MenuHandler:
             draw.text((50,30),str(self.CounterValue_LCP)+" dB",font=font, fill="white")
     
     
-    def display_option_ALC(self):
+    def display_option_Ref_Clock(self):
         with canvas(self.device) as draw: 
-            draw.text((30, 0), "Modo ALC:  ", font=font, fill="white")
+            draw.text((30, 0), "Modo Ref_Clock:  ", font=font, fill="white")
             draw.text((10,40),"External   Internal",font=font, fill="white")
-            for i, option in enumerate(self.options_ALC):
+            for i, option in enumerate(self.options_Ref_Clock):
                 x_position = 85 - i * 55
                 if i == self.Menu_option_ALC:
                     draw.text((x_position, 50), "▲" , font=font, fill="white")
@@ -370,12 +370,12 @@ class MenuHandler:
         print("RCP: "+str(self.CounterValue_LCP)+" dB")
         self.select_option_LCP()
 
-    def next_option_ALC(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
-        self.Menu_option_ALC += 1
-        if self.Menu_option_ALC > 1 :
-            self.Menu_option_ALC = 0
-        print("Menu_option_confirmacion: "+ str(self.Menu_option_ALC))
-        self.select_option_ALC()
+    def next_option_Ref_Clock(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
+        self.Menu_option_Ref_Clock += 1
+        if self.Menu_option_Ref_Clock > 1 :
+            self.Menu_option_Ref_Clock = 0
+        print("Menu_option_confirmacion: "+ str(self.Menu_option_Ref_Clock))
+        self.select_option_Ref_Clock()
 
     def next_option_Status(self): # al ser una solucion vinaria solo hace falta un modificador para el encoder.
         self.Menu_option_Status += 1
@@ -440,11 +440,11 @@ class MenuHandler:
         # En lugar de imprimir en consola, muestra en la OLED:
         self.display_option_LCP()
 
-    def select_option_ALC(self):
+    def select_option_Ref_Clock(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
         #selected = self.options0[self.Menu0_option]
         # En lugar de imprimir en consola, muestra en la OLED:
-        self.display_option_ALC()
+        self.display_option_Ref_Clock()
 
     def select_option_Status(self):
         # Aquí defines lo que ocurre cuando se selecciona una opción
@@ -620,18 +620,18 @@ class MenuHandler:
                 self.menu = 10
                 self.menu_confirmacion()
             elif self.menu == 4:
-                # codigo para ALC
-                if self.Menu_option_ALC == 0 :
+                # codigo para Ref_Clock
+                if self.Menu_option_Ref_Clock == 0 :
                     # la opcion seleccionada es CLOSED.
-                    print("ALC modificado a closed")
-                    self.queue_m_c.put("alc_mode=closed")
+                    print("Ref_Clock modificado a int")
+                    self.queue_m_c.put("set_ref_clock=int")
                     ## enviamos la canfiguracion al servidor
                     self.menu=0
                     self.display_option()
                 else:
                     # la opcion seleccionada es Opened.
-                    print("ALC modificado a opened")
-                    self.queue_m_c.put("set_alc_mode=opened")
+                    print("Ref_Clock modificado a ext")
+                    self.queue_m_c.put("set_ref_clock=ext")
 
                     ## enviamos la canfiguracion al servidor
                     self.menu=0
