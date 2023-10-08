@@ -264,12 +264,15 @@ class MenuHandler:
     def display_option_Ref_Clock(self):
         # Calcula el tamaño de los textos y de la imagen:
         textwidth_title = font.getlength("Modo Ref_Clock:")
+        textwidth_selection = font.getlength("External   Internal")
         
         # Calcula las coordenadas x,centrar el texto
         x_title = (device.width - textwidth_title) // 2
+        x_selection = (device.width - textwidth_selection) // 2
+
         with canvas(self.device) as draw: 
             draw.text((x_title, 0), "Modo Ref_Clock:", font=font, fill="white")
-            draw.text((10,40),"External   Internal",font=font, fill="white")
+            draw.text((x_selection,40),"External   Internal",font=font, fill="white")
             for i, option in enumerate(self.options_Ref_Clock):
                 x_position = 85 - i * 55
                 if i == self.Menu_option_Ref_Clock:
