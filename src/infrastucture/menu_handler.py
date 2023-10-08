@@ -211,12 +211,13 @@ class MenuHandler:
         
         with canvas(self.device) as draw: 
             # Calcula el tamaño del texto
+            textwidth = font.getlength(error)
             # Calcula las coordenadas x,centrar el texto
-           
+            x = (device.width - textwidth) // 2
 
             draw.text((40, 0), "ERROR", font=font, fill="white")
             draw.bitmap((40.20,10),self.img_emergencia,fill="white")
-            draw.text((0,50),error, font=font, fill="white",align='center')
+            draw.text((x,50),error, font=font, fill="white")
     
     def display_Logo(self):
         with Image.open(self.image_path) as img:
