@@ -64,10 +64,10 @@ class Conection:
                         list_Comand = Comand.split("=")
                         
                         print(f'Dato:{list_Comand[0]}') 
-
+                        print(f'variable:{list_Comand}')
                         if len(list_Comand)<2:
                             list_Comand.append("p")
-                        
+
                         elif list_Comand[0] == "get_rcp":
                             num = int(list_Comand[1])
                             jsonString = '{"x":"rcp","rcp":'+str(num)+'}'
