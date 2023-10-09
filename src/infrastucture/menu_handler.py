@@ -763,6 +763,8 @@ class MenuHandler:
         for pin in gpioA1_pins:
             GPIO.output(pin, GPIO.LOW)
         time.sleep(0.1)  # Espera 100 ms
+        self.queue_m_c.put("rcp = "+str(self.Att_RCP))
+
 
     def set_LCP(self,value):
         num_bits = len(gpioA2_pins)
@@ -789,6 +791,7 @@ class MenuHandler:
         for pin in gpioA2_pins:
             GPIO.output(pin, GPIO.LOW)
         time.sleep(0.1)  # Espera 100 ms
+        self.queue_m_c.put("lcp = "+str(self.Att_LCP))
 
 #---------------------------------------------------------------------------------------------------------------#
 #---------------------------------------------------------------------------------------------------------------#
