@@ -364,6 +364,31 @@ class MenuHandler:
                         draw.text((x_position, 50), "▲" , font=font, fill="white")
                     else:
                         draw.text((x_position, 50), " " , font=font, fill="white")
+            if tipo == 4: #no indica que el cambio es de LCP
+                if variable == 0 :
+                    draw.text((8,12),"Ref_clock:",font=font, fill="white")
+                    draw.text((50,25),"Interna",font=font, fill="white")
+                    draw.text((30,40),"SI          NO",font=font, fill="white")
+                    for i, option in enumerate(self.options_confirmacion):
+                        x_position = 85 - i * 55
+                        if i == self.Menu_option_confirmacion:
+                            draw.text((x_position, 50), "▲" , font=font, fill="white")
+                        else:
+                            draw.text((x_position, 50), " " , font=font, fill="white")
+                else:
+                    draw.text((8,12),"Ref_clock:",font=font, fill="white")
+                    draw.text((50,25),"Externa",font=font, fill="white")
+                    draw.text((30,40),"SI          NO",font=font, fill="white")
+                    for i, option in enumerate(self.options_confirmacion):
+                        x_position = 85 - i * 55
+                        if i == self.Menu_option_confirmacion:
+                            draw.text((x_position, 50), "▲" , font=font, fill="white")
+                        else:
+                            draw.text((x_position, 50), " " , font=font, fill="white")
+
+              
+
+
 
     def format_with_spaces(self, n):
         s = str(n)
@@ -565,6 +590,9 @@ class MenuHandler:
             self.display_Confirmacion(self.tipo,self.CounterValue_RCP)
         elif self.tipo == 3:
             self.display_Confirmacion(self.tipo,self.CounterValue_LCP)
+        elif self.tipo == 4:
+            self.display_Confirmacion(self.tipo,self.Menu_option_Ref_Clock)
+            
 
     def handle_button(self, channel):
         start_time = time.time()
@@ -664,22 +692,9 @@ class MenuHandler:
                 self.menu = 10
                 self.menu_confirmacion()
             elif self.menu == 4:
-                # codigo para Ref_Clock
-                if self.Menu_option_Ref_Clock == 0 :
-                    # la opcion seleccionada es CLOSED.
-                    print("Ref_Clock modificado a int")
-                    self.queue_m_c.put("set_ref_clock=int")
-                    ## enviamos la canfiguracion al servidor
-                    self.menu=0
-                    self.display_option()
-                else:
-                    # la opcion seleccionada es Opened.
-                    print("Ref_Clock modificado a ext")
-                    self.queue_m_c.put("set_ref_clock=ext")
-
-                    ## enviamos la canfiguracion al servidor
-                    self.menu=0
-                    self.display_option()
+                self.tipo=4
+                self.menu = 10
+                self.menu_confirmacion()
 
             elif self.menu == 5:
                 # codigo para Status, es solo de visualizacion asique salimos si pulsamos.
@@ -733,6 +748,23 @@ class MenuHandler:
                         self.save_variables()
                         self.menu=0
                         self.display_option()
+                if self.tipo == 4: # Confirmamos la configuracion de LCP
+                    if self.Menu_option_confirmacion == 0 :
+                        # la confirmacion es negativa por lo que salimos sin hacer nada.
+                        print("modificacion de ref_clock cancelada")
+                        self.menu=0
+                        self.display_option()
+                    else:
+                        # la confirmacion es positiva por lo que tendremos que enviar el valor al servidor con la funcion set_fr = valor confirmado.
+                        if self.Menu_option_Ref_Clock == 0:
+                            print("ref_clock = int")
+                            self.queue_m_c.put("set_ref_clock = int")
+                        else:
+                            print("ref_clock = ext")
+                            self.queue_m_c.put("set_ref_clock = ext")
+                
+
+                
 
 
 #---------------------------------------------------------------------------------------------------------------#
