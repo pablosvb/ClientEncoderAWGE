@@ -911,9 +911,12 @@ class MenuHandler:
                         self.rf_enable = data["rf1_out_enable"] 
                         self.rf1_standby = data["rf1_standby"]
                         self.MAIN = data["main"]
-                        self.ext_ref_lock_enable = data["ext_ref_lock_enable"]
+                        self.ext_ref_lock_enable = data["ref_lock_enable"]
                         self.crs_ref_pll_ld = data["crs_ref_pll_ld"]
                         self.over_temp = data["over_temp"]
+
+                        
+    
 
                         print("error: "+str(data["error"]))
 
