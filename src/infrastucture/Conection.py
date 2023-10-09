@@ -65,6 +65,7 @@ class Conection:
                         list_Comand = Comand.split("=")
                         
                         print(f'Dato:{list_Comand}') 
+                        print(list_Comand[0][0])
 
                         if list_Comand[0] == "set_rcp":
                             num = int(list_Comand[1])
@@ -81,8 +82,9 @@ class Conection:
                         
                         elif list_Comand[0] == 'get_rcp':
                             self.queue_c_m.put("get_rcp") 
-                        else:
-                            self.queue_c_m.put(data.decode())
+                        
+                        elif list_Comand[0][0] == '{':
+                            self.queue_c_m.put(datos); 
                     
 
             except socket.gaierror as e:
