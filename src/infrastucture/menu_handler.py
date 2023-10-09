@@ -961,14 +961,19 @@ class MenuHandler:
                         print("error: "+str(data["error"]))
 
                         if self.error == 1:
+                            self.device.show()
                             self.display_Emergencia("Sintetizador")
                         elif self.error == 2:
+                            self.device.show()
                             self.display_Emergencia("Referencia EXT")
                         elif self.error == 3:
+                            self.device.show()
                             self.display_Emergencia("Temperatura")
                         elif self.error == 4:
+                            self.device.show()
                             self.display_Emergencia("RF_ENABLE:")
                         elif self.error == 5:
+                            self.device.show()
                             self.display_Emergencia("RF1_STANDBY")
                         elif self.error == 0:
                             self.display_option()
