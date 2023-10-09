@@ -63,18 +63,9 @@ class Conection:
                         Comand = datos_lower.replace(" ","")
                         list_Comand = Comand.split("=")
                         
-                        print(f'Dato:{list_Comand[0]}') 
-                        print(f'variable:{list_Comand}')
-                        if len(list_Comand)<2:
-                            list_Comand.append("p")
+                        print(f'Dato:{list_Comand}') 
 
-                        elif list_Comand[0] == "get_rcp":
-                            num = int(list_Comand[1])
-                            jsonString = '{"x":"rcp","rcp":'+str(num)+'}'
-                            print(jsonString)
-                            self.queue_c_m.put(jsonString)
-
-                        elif list_Comand[0] == "set_rcp":
+                        if list_Comand[0] == "set_rcp":
                             num = int(list_Comand[1])
                             jsonString = '{"x":"rcp","rcp":'+str(num)+'}'
                             print(jsonString)
@@ -85,8 +76,13 @@ class Conection:
                             jsonString = '{"x":"rcp","rcp":'+str(num)+'}'
                             self.queue_c_m.put(jsonString)
 
-                        elif list_Comand[0] == "get_lcp":
+                        elif list_Comand[0] == 'get_lcp':
+                            print("dentro del get_lcp")
                             self.queue_c_m.put("get_lcp") 
+                        
+                        elif list_Comand[0] == 'get_rcp':
+                            print("dentro del get_rcp")
+                            self.queue_c_m.put("get_rcp") 
                             
                     
 
