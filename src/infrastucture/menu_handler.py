@@ -904,6 +904,7 @@ class MenuHandler:
                         self.Att_RCP = data["lcp"]
                         self.set_LCP(self.Att_LCP)
                         self.save_variables()
+
                     elif data["x"] == "error":
 
                         self.error = data["error"]
@@ -913,6 +914,8 @@ class MenuHandler:
                         self.ext_ref_lock_enable = data["ext_ref_lock_enable"]
                         self.crs_ref_pll_ld = data["crs_ref_pll_ld"]
                         self.over_temp = data["over_temp"]
+
+                        print("error: "+str(data["error"]))
 
                         if self.error == 1:
                             self.display_option_Error("MAIN")
