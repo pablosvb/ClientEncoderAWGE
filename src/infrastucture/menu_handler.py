@@ -268,7 +268,7 @@ class MenuHandler:
     
     def display_option_Ref_Clock(self):
         # Calcula el tamaño de los textos y de la imagen:
-        textwidth_title = font.getlength("Ref_Clock:"+self.ext_ref_detect)
+        textwidth_title = font.getlength("Ref_Clock:"+self.ext_ref_lock)
         textwidth_selection = font.getlength("External   Internal")
         
         # Calcula las coordenadas x,centrar el texto
@@ -276,7 +276,7 @@ class MenuHandler:
         x_selection = (device.width - textwidth_selection) // 2
 
         with canvas(self.device) as draw: 
-            draw.text((x_title, 0), "Ref_Clock: "+self.ext_ref_detect, font=font, fill="white")
+            draw.text((x_title, 0), "Ref_Clock: "+self.ext_ref_lock, font=font, fill="white")
             draw.text((x_selection,40),"External   Internal",font=font, fill="white")
             for i, option in enumerate(self.options_Ref_Clock):
                 x_position = 85 - i * 55
@@ -871,6 +871,7 @@ class MenuHandler:
                         self.MAIN = data["MAIN"]
                         self.ref_out_select = data["ref_out_select"]
                         self.ext_ref_detect = data["ext_ref_detect"]
+                        self.ext_ref_lock_enable = data["ext_ref_lock_enable"]
                         self.ref_TCXO_pll = data["ref_TCXO_pll"]
                         self.ref_VCXO_pll = data["ref_VCXO_pll"]
                         self.ext_ref_lock = data["ext_ref_lock"]
