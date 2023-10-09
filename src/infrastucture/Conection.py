@@ -70,6 +70,7 @@ class Conection:
                         elif list_Comand[0] == "set_rcp":
                             num = int(list_Comand[1])
                             jsonString = '{"x":"rcp","rcp":'+str(num)+'}'
+                            print(jsonString)
                             self.queue_c_m.put(jsonString)
 
                         elif list_Comand[0] == "set__lcp":
