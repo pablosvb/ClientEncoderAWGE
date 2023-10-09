@@ -82,7 +82,7 @@ class Conection:
                         elif list_Comand[0] == 'get_rcp':
                             self.queue_c_m.put("get_rcp") 
                         else:
-                            self.queue_c_m.put(datos)
+                            self.queue_c_m.put(data.decode())
                     
 
             except socket.gaierror as e:
