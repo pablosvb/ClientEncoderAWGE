@@ -849,7 +849,7 @@ class MenuHandler:
                     valor = "nada"
                 
                 if valor == "error" :
-                    self.display_Emergencia("Conexion servidor")
+                    self.display_Emergencia("Reiniciar equipo")
                 elif valor == "conectado":
                     self.display_option()
                 elif valor == "get_rcp":
