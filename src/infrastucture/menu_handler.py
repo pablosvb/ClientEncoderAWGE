@@ -660,7 +660,7 @@ class MenuHandler:
                 self.menu_confirmacion()
             elif self.menu == 4:
                 # codigo para Ref_Clock
-                if self.Menu_option_Ref_Clock == 0 :
+                if self.Menu_option_Ref_Clock == 1 :
                     # la opcion seleccionada es CLOSED.
                     print("Ref_Clock modificado a int")
                     self.queue_m_c.put("set_ref_clock=int")
