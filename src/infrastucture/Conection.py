@@ -83,7 +83,7 @@ class Conection:
                         elif list_Comand[0] == 'get_rcp':
                             self.queue_c_m.put("get_rcp") 
                         
-                        elif list_Comand[0][0] == "{":
+                        elif list_Comand[0][0] == "{" and mensaje != "get_status_cm":
                             self.queue_c_m.put(datos); 
                     
 
