@@ -50,7 +50,7 @@ class Conection:
                     # Escucha mensajes del servidor sin bloquear
                     ready_to_read, _, _ = select.select([s], [], [], 0.1)  # Verifica si hay datos en el socket para leer con un timeout de 0.1 segundos
                     if ready_to_read:  # Si hay datos para leer
-                        data = s.recv(1024)
+                        data = s.recv(2048)
                         if not data:
                             print("Conexión cerrada por el servidor.")
                             break
