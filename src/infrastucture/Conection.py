@@ -64,6 +64,7 @@ class Conection:
                         list_Comand = Comand.split("=")
                         
                         print(f'Dato:{list_Comand[0]}') 
+
                         if len(list_Comand)<2:
                             list_Comand.append("p")
                         
