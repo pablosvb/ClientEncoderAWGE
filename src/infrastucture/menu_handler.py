@@ -205,7 +205,7 @@ class MenuHandler:
     def display_Emergencia(self,error):
         # Calcula el tamaño de los textos y de la imagen:
         textwidth_error = font.getlength(error)
-        textwidth_title = font.getlength("ERROR")
+        textwidth_title = font.getlength("ALARMA")
         imagenwidth = self.img_emergencia.width
         # Calcula las coordenadas x,centrar el texto
         x_error = (device.width - textwidth_error) // 2
@@ -213,7 +213,7 @@ class MenuHandler:
         x_imagen = (device.width - imagenwidth)//2
 
         with canvas(self.device) as draw: 
-            draw.text((x_title, 0), "ERROR", font=font, fill="white")
+            draw.text((x_title, 0), "ALARMA", font=font, fill="white")
             draw.bitmap((x_imagen,10),self.img_emergencia,fill="white")
             draw.text((x_error,50),error, font=font, fill="white")
     
@@ -927,7 +927,7 @@ class MenuHandler:
                         elif self.error == 3:
                             self.display_Emergencia("OVER_TEMP")
                         elif self.error == 4:
-                            self.display_Emergencia("RF1_OUT_ENABLE")
+                            self.display_Emergencia("RF_ENABLE:")
                         elif self.error == 5:
                             self.display_Emergencia("RF1_STANDBY")
                         elif self.error == 0:
