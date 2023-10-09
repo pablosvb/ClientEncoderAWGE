@@ -845,6 +845,7 @@ class MenuHandler:
                 elif valor == "conectado":
                     self.display_option()
                 elif valor == "get_rcp":
+                    print("estoy en el menu handler")
                     self.queue_m_c.put("rcp:"+str(self.Att_RCP))
                 elif valor == "get_lcp":
                     self.queue_m_c.put("lcp:"+str(self.Att_LCP))

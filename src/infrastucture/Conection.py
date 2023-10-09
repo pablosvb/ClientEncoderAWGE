@@ -73,11 +73,12 @@ class Conection:
                             print(jsonString)
                             self.queue_c_m.put(jsonString)
 
-                        elif list_Comand[0] == "set__lcp":
+                        elif list_Comand[0] == "set_lcp":
                             num = int(list_Comand[1])
                             jsonString = '{"x":"rcp","rcp":'+str(num)+'}'
                             self.queue_c_m.put(jsonString)
                         elif list_Comand[0] == "get_rcp":
+                            print("dentro del get_rcp")
                             self.queue_c_m.put("get_rcp")
                         elif list_Comand[0] == "get_lcp":
                             self.queue_c_m.put("get_lcp") 
