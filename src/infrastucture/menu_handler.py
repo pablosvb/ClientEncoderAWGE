@@ -211,11 +211,16 @@ class MenuHandler:
         x_error = (device.width - textwidth_error) // 2
         x_title = (device.width - textwidth_title) // 2
         x_imagen = (device.width - imagenwidth)//2
-
-        with canvas(self.device) as draw: 
-            draw.text((x_title, 0), "ALARMA", font=font, fill="white")
-            draw.bitmap((x_imagen,10),self.img_emergencia,fill="white")
-            draw.text((x_error,50),error, font=font, fill="white")
+        if error == "OVER_TEMP" :
+            with canvas(self.device) as draw: 
+                draw.text((x_title, 0), "ALARMA", font=font, fill="white")
+                draw.bitmap((x_imagen,10),self.img_emergencia,fill="white")
+                draw.text((x_error,50),error+" "+str(self.over_temp), font=font, fill="white")
+        else:
+            with canvas(self.device) as draw: 
+                draw.text((x_title, 0), "ALARMA", font=font, fill="white")
+                draw.bitmap((x_imagen,10),self.img_emergencia,fill="white")
+                draw.text((x_error,50),error, font=font, fill="white")
     
     def display_Logo(self):
         with Image.open(self.image_path) as img:
@@ -921,11 +926,11 @@ class MenuHandler:
                         print("error: "+str(data["error"]))
 
                         if self.error == 1:
-                            self.display_Emergencia("MAIN")
+                            self.display_Emergencia("Sintetizador")
                         elif self.error == 2:
-                            self.display_Emergencia("CRS_REF")
+                            self.display_Emergencia("Referencia EXT")
                         elif self.error == 3:
-                            self.display_Emergencia("OVER_TEMP")
+                            self.display_Emergencia("Temperatura")
                         elif self.error == 4:
                             self.display_Emergencia("RF_ENABLE:")
                         elif self.error == 5:
