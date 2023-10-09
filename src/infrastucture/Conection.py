@@ -56,7 +56,12 @@ class Conection:
                             break
                         if mensaje == "get_status_cm":
                             print("dentro")
-                            self.queue_c_m.put(data.decode())
+                            datos = data.decode()
+                            if datos[0] == "{":
+                                self.queue_c_m.put(data.decode())
+
+
+                                
                         print(f'Server:{data.decode()}')   
 
                         datos = data.decode()
