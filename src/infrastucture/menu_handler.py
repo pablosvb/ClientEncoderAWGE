@@ -915,23 +915,23 @@ class MenuHandler:
                         self.crs_ref_pll_ld = data["crs_ref_pll_ld"]
                         self.over_temp = data["over_temp"]
 
-                        
+     
     
 
                         print("error: "+str(data["error"]))
 
                         if self.error == 1:
-                            self.display_option_Error("MAIN")
+                            self.display_Emergencia("MAIN")
                         elif self.error == 2:
-                            self.display_option_Error("CRS_REF")
+                            self.display_Emergencia("CRS_REF")
                         elif self.error == 3:
-                            self.display_option_Error("OVER_TEMP")
+                            self.display_Emergencia("OVER_TEMP")
                         elif self.error == 4:
-                            self.display_option_Error("RF1_OUT_ENABLE")
+                            self.display_Emergencia("RF1_OUT_ENABLE")
                         elif self.error == 5:
-                            self.display_option_Error("RF1_STANDBY")
+                            self.display_Emergencia("RF1_STANDBY")
                         elif self.error == 0:
-                            self.self.display_option()
+                            self.display_option()
 
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
                 pass
