@@ -43,7 +43,7 @@ class Conection:
                         mensaje = self.queue_m_c.get(timeout=0.1)  # Intenta obtener un mensaje con un timeout de 0.1 segundos
                         print("imprimiendo mensaje:"+ mensaje)
                         s.sendall(mensaje.encode())
-                        time.sleep(0.1)
+                        time.sleep(0.5)
                     except queue.Empty:  # No hay mensajes para enviar
                         pass
 
