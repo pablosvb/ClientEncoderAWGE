@@ -43,6 +43,7 @@ class Conection:
                         mensaje = self.queue_m_c.get(timeout=0.1)  # Intenta obtener un mensaje con un timeout de 0.1 segundos
                         print("imprimiendo mensaje:"+ mensaje)
                         s.sendall(mensaje.encode())
+                        time.sleep(0.1)
                     except queue.Empty:  # No hay mensajes para enviar
                         pass
 
@@ -68,7 +69,6 @@ class Conection:
                         if list_Comand[0] == "set_rcp":
                             num = int(list_Comand[1])
                             jsonString = '{"x":"rcp","rcp":'+str(num)+'}'
-                            print(jsonString)
                             self.queue_c_m.put(jsonString)
 
                         elif list_Comand[0] == "set_lcp":
@@ -77,11 +77,9 @@ class Conection:
                             self.queue_c_m.put(jsonString)
 
                         elif list_Comand[0] == 'get_lcp':
-                            print("dentro del get_lcp")
                             self.queue_c_m.put("get_lcp") 
                         
                         elif list_Comand[0] == 'get_rcp':
-                            print("dentro del get_rcp")
                             self.queue_c_m.put("get_rcp") 
                             
                     
