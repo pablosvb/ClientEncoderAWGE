@@ -276,7 +276,7 @@ class MenuHandler:
         x_selection = (device.width - textwidth_selection) // 2
 
         with canvas(self.device) as draw: 
-            draw.text((x_title, 0), "Modo Ref_Clock: "+self.ext_ref_detect, font=font, fill="white")
+            draw.text((x_title, 0), "Ref_Clock: "+self.ext_ref_detect, font=font, fill="white")
             draw.text((x_selection,40),"External   Internal",font=font, fill="white")
             for i, option in enumerate(self.options_Ref_Clock):
                 x_position = 85 - i * 55
