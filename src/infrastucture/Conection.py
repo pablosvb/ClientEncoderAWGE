@@ -65,7 +65,7 @@ class Conection:
                         list_Comand = Comand.split("=")
                         
                         print(f'Dato:{list_Comand}') 
-                        print(list_Comand[0][0])
+                        print("el caracter es :"+list_Comand[0][0])
 
                         if list_Comand[0] == "set_rcp":
                             num = int(list_Comand[1])
