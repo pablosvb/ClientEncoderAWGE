@@ -366,8 +366,7 @@ class MenuHandler:
                         draw.text((x_position, 50), " " , font=font, fill="white")
             if tipo == 4: #no indica que el cambio es de LCP
                 if variable == 0 :
-                    draw.text((8,12),"Ref_clock:",font=font, fill="white")
-                    draw.text((50,25),"Interna",font=font, fill="white")
+                    draw.text((25,12),"Ref_clock: INT",font=font, fill="white")
                     draw.text((30,40),"SI          NO",font=font, fill="white")
                     for i, option in enumerate(self.options_confirmacion):
                         x_position = 85 - i * 55
@@ -376,8 +375,7 @@ class MenuHandler:
                         else:
                             draw.text((x_position, 50), " " , font=font, fill="white")
                 else:
-                    draw.text((8,12),"Ref_clock:",font=font, fill="white")
-                    draw.text((50,25),"Externa",font=font, fill="white")
+                    draw.text((25,12),"Ref_clock: EXT",font=font, fill="white")
                     draw.text((30,40),"SI          NO",font=font, fill="white")
                     for i, option in enumerate(self.options_confirmacion):
                         x_position = 85 - i * 55
