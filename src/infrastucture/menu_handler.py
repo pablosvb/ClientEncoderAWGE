@@ -618,6 +618,7 @@ class MenuHandler:
                 self.device.show()
                 self.display_Logo()
                 time.sleep(2)
+                self.display_option()
                 self.menu = 0
             elif self.menu == 0:
                 self.select_option()
