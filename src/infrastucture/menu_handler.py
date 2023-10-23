@@ -887,7 +887,7 @@ class MenuHandler:
                 
                 if valor == "error" :
                     self.display_Emergencia("Reiniciar equipo")
-                    self.menu = -1
+                    self.menu = -2
                 elif valor == "conectado":
                     self.display_option()
                     self.menu = 0
