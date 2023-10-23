@@ -80,6 +80,8 @@ class MenuHandler:
         self.Menu0_option = 0
         self.selected = ""
 
+        self.errorsistema = False
+
 
         # Variables menu frecuencia 
         self.Menu_Option_fr = 0
@@ -885,8 +887,10 @@ class MenuHandler:
                 
                 if valor == "error" :
                     self.display_Emergencia("Reiniciar equipo")
+                    self.menu = -1
                 elif valor == "conectado":
                     self.display_option()
+                    self.menu = 0
                 elif valor == "get_rcp":
                     print("estoy en el menu handler")
                     self.queue_m_c.put("rcp = "+str(self.Att_RCP))
