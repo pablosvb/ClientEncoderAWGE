@@ -488,6 +488,8 @@ class MenuHandler:
         self.selected = self.options_menu[self.Menu0_option] 
         self.queue_m_c.put("get_status_cm") # se pide informacion al servidor para completar informacion.
         # la informacion se recive en la funcion run.
+
+        
             
             
 
@@ -933,6 +935,13 @@ class MenuHandler:
                             self.select_option_LCP()
                         elif self.selected == "Ref_Clock":
                             self.menu=4
+                            # aqui podemos modificar la variable para que cuiando entremos la flecha selectora 
+                            # se ponga en la opcion actual
+                            if self.ext_ref_lock == "ext":
+                                self.CounterValue_Ref_Clock = 1
+                            elif self.ext_ref_lock == "int":
+                                self.CounterValue_Ref_Clock = 0
+
                             self.select_option_Ref_Clock()
                         elif self.selected == "Status":
                             self.select_option_Status()
