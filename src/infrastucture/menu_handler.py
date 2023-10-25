@@ -888,7 +888,7 @@ class MenuHandler:
                     valor = "nada"
                 
                 if valor == "error" :
-                    self.display_Emergencia("Reiniciar equipo")
+                    self.display_Emergencia("Fallo Sintetizador")
                     self.menu = -2
                 elif valor == "conectado":
                     self.display_option()
@@ -993,7 +993,7 @@ class MenuHandler:
                             self.display_option()
                             self.menu = 0
                         elif self.error == 10:
-                            self.display_Emergencia("Reiniciar equipo")
+                            self.display_Emergencia("Fallo Sintetizador")
                             self.menu = -2
 
 
