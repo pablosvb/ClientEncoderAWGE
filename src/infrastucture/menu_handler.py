@@ -762,13 +762,11 @@ class MenuHandler:
                         if self.Menu_option_Ref_Clock == 0:
                             print("ref_clock = int")
                             self.queue_m_c.put("set_ref_clock = int")
-                            self.CounterValue_Ref_Clock = 0
                             self.menu=0
                             self.display_option()
                         else:
                             print("ref_clock = ext")
                             self.queue_m_c.put("set_ref_clock = ext")
-                            self.CounterValue_Ref_Clock = 1
                             self.menu=0
                             self.display_option()
                 
@@ -939,9 +937,9 @@ class MenuHandler:
                             self.menu=4
                             # aqui podemos modificar la variable para que cuiando entremos la flecha selectora 
                             # se ponga en la opcion actual
-                            if self.ext_ref_lock == "ext":
+                            if self.ext_ref_lock == "Ext":
                                 self.Menu_option_Ref_Clock = 1
-                            elif self.ext_ref_lock == "int":
+                            elif self.ext_ref_lock == "Int":
                                 self.Menu_option_Ref_Clock = 0
 
                             self.select_option_Ref_Clock()
