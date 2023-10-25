@@ -762,11 +762,13 @@ class MenuHandler:
                         if self.Menu_option_Ref_Clock == 0:
                             print("ref_clock = int")
                             self.queue_m_c.put("set_ref_clock = int")
+                            self.CounterValue_Ref_Clock = 1
                             self.menu=0
                             self.display_option()
                         else:
                             print("ref_clock = ext")
                             self.queue_m_c.put("set_ref_clock = ext")
+                            self.CounterValue_Ref_Clock = 0
                             self.menu=0
                             self.display_option()
                 
