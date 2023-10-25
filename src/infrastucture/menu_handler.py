@@ -991,6 +991,10 @@ class MenuHandler:
                             self.display_Emergencia("RF1_STANDBY")
                         elif self.error == 0:
                             self.display_option()
+                        elif self.error == 10:
+                            self.display_Emergencia("Reiniciar equipo")
+                            self.menu = -2
+
 
             # Simulando alguna operación, puedes eliminar el sleep si no lo necesitas
                 pass
