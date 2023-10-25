@@ -940,9 +940,9 @@ class MenuHandler:
                             # aqui podemos modificar la variable para que cuiando entremos la flecha selectora 
                             # se ponga en la opcion actual
                             if self.ext_ref_lock == "ext":
-                                self.Menu_option_Ref_Clock = 0
-                            elif self.ext_ref_lock == "int":
                                 self.Menu_option_Ref_Clock = 1
+                            elif self.ext_ref_lock == "int":
+                                self.Menu_option_Ref_Clock = 0
 
                             self.select_option_Ref_Clock()
                         elif self.selected == "Status":
