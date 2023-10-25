@@ -991,6 +991,7 @@ class MenuHandler:
                             self.display_Emergencia("RF1_STANDBY")
                         elif self.error == 0:
                             self.display_option()
+                            self.menu = 0
                         elif self.error == 10:
                             self.display_Emergencia("Reiniciar equipo")
                             self.menu = -2
