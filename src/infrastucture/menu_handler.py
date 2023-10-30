@@ -71,7 +71,7 @@ class MenuHandler:
         self.terminate_event = terminate_event 
         self.queue_c_m = queue_c_m
         self.queue_m_c = queue_m_c
-        self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "Ref_Clock", "Statu"]
+        self.options_menu = ["Frecuencia", "Att_RCP", "Att_LCP", "Ref_Clock", "Status"]
         self.options_frecuencia = [0,0,0,0,0,0,0,0,0,0,0]
         self.options_Ref_Clock = ["External", "Internal"]
         self.options_confirmacion =["SI","NO"]
